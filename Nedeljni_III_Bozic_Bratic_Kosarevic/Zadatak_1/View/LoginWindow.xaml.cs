@@ -23,5 +23,10 @@ namespace Zadatak_1.View
         {
             InitializeComponent();
         }
+
+        private void BtnLogin(object sender, RoutedEventArgs e)
+        {
+
+        }
     }
 }
