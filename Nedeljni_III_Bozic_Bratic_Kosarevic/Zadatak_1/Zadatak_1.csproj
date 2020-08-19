@@ -64,8 +64,12 @@
     <Compile Include="Models\Recept.cs" />
     <Compile Include="Models\Type.cs" />
     <Compile Include="Models\User.cs" />
+    <Compile Include="Validations\UserValidation.cs" />
     <Compile Include="View\LoginWindow.xaml.cs">
       <DependentUpon>LoginWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\RecepieWindow.xaml.cs">
+      <DependentUpon>RecepieWindow.xaml</DependentUpon>
     </Compile>
   </ItemGroup>
   <ItemGroup>
@@ -96,11 +100,14 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Files\" />
-    <Folder Include="Validations\" />
     <Folder Include="ViewModel\" />
   </ItemGroup>
   <ItemGroup>
     <Page Include="View\LoginWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\RecepieWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
