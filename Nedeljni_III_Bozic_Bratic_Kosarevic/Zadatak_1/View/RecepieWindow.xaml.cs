@@ -11,6 +11,7 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using Zadatak_1.ViewModel;
 
 namespace Zadatak_1.View
 {
@@ -19,9 +20,34 @@ namespace Zadatak_1.View
     /// </summary>
     public partial class RecepieWindow : Window
     {
+        RecepieViewModel rvm = new RecepieViewModel();
+
         public RecepieWindow()
         {
             InitializeComponent();
+            DataContext = rvm;
+        }
+
+        private void AddNewRecepie(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void Logout(object sender, RoutedEventArgs e)
+        {
+            LoginWindow window = new LoginWindow();
+            window.Show();
+            Close();
+        }
+
+        private void EditRecepie(object sender, RoutedEventArgs e)
+        {
+            
+        }
+
+        private void DeleteRecepie(object sender, RoutedEventArgs e)
+        {
+            
         }
     }
 }

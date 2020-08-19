@@ -8,6 +8,31 @@
         mc:Ignorable="d"
         Title="RecepieWindow" Height="450" Width="800">
     <Grid>
-        
+        <TextBlock TextAlignment="Center" Text="All Recepies" Foreground="#282828" Margin="239,10,276,368" HorizontalAlignment="Center" FontSize="25" Width="150"/>
+        <Button Content="Add New Recepie" HorizontalAlignment="Left" Margin="10,62,0,0" VerticalAlignment="Top" Width="100" Click="AddNewRecepie"/>
+        <DataGrid x:Name="datagrid" ItemsSource="{Binding Recepies}" AutoGenerateColumns="False" CanUserAddRows="False"
+Height="288" Width="772" Margin="10,87,10,44" HorizontalAlignment="Center" SelectedItem="{Binding Recepie, UpdateSourceTrigger=PropertyChanged}">
+            <DataGrid.Columns>
+                <DataGridTextColumn Header="Recepie Title" Binding="{Binding ReceptName}" IsReadOnly="True"/>
+                <DataGridTextColumn Header="Recepie Type" Binding="{Binding ReceptType}" IsReadOnly="True"/>
+                <DataGridTextColumn Header="Persons" Binding="{Binding PersonNumber}" IsReadOnly="True" />
+                <DataGridTextColumn Header="Creation Date" Binding="{Binding CreationDate, StringFormat=dd/MM/yyyy}" IsReadOnly="True" />
+                <DataGridTemplateColumn Header="Edit">
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <Button IsEnabled="{Binding CanEdit}" Click="EditRecepie" Content="E"/>
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
+                <DataGridTemplateColumn Header="Delete">
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <Button IsEnabled="{Binding CanDelete}"  Click="DeleteRecepie" Content="X"/>
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
+            </DataGrid.Columns>
+        </DataGrid>
+        <Button Content="Logout" HorizontalAlignment="Left" Margin="10,389,0,0" VerticalAlignment="Top" Width="75" Click="Logout"/>
     </Grid>
 </Window>

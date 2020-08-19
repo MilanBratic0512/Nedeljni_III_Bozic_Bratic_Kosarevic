@@ -43,7 +43,7 @@ namespace Zadatak_1.View
 
             SqlConnection sqlCon = new SqlConnection(ConfigurationManager.ConnectionStrings["con"].ToString());
             //User is extracted from the database matching inserted paramaters Username and Password.
-            SqlCommand query = new SqlCommand("SELECT * FROM tblUser WHERE Username=@Username AND Pasword=@Password", sqlCon);
+            SqlCommand query = new SqlCommand("SELECT * FROM tblUser WHERE Username=@Username AND Password=@Password", sqlCon);
             query.CommandType = CommandType.Text;
             query.Parameters.AddWithValue("@Username", txtUsername.Text);
             query.Parameters.AddWithValue("@Password", hash);
@@ -93,7 +93,7 @@ namespace Zadatak_1.View
 
                 sqlCon = new SqlConnection(ConfigurationManager.ConnectionStrings["con"].ToString());
                 //User is extracted from the database matching inserted paramaters Username and Password.
-                query = new SqlCommand("SELECT * FROM tblUser WHERE Username=@Username AND Pasword=@Password", sqlCon);
+                query = new SqlCommand("SELECT * FROM tblUser WHERE Username=@Username AND Password=@Password", sqlCon);
                 query.CommandType = CommandType.Text;
                 query.Parameters.AddWithValue("@Username", txtUsername.Text);
                 query.Parameters.AddWithValue("@Password", hash);

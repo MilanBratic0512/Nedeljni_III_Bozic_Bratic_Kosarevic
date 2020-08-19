@@ -17,6 +17,8 @@ namespace Zadatak_1.Models
         public string Author { get; set; }
         public string ReceptText { get; set; }
         public DateTime CreationDate { get; set; }
+        public bool CanEdit { get; set; }
+        public bool CanDelete { get; set; }
 
     }
 }

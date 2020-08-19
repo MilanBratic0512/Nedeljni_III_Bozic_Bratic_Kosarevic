@@ -62,10 +62,10 @@ Add foreign key (TypeID) references tblType(TypeID);
 Alter Table tblComponents
 Add foreign key (ReceptID) references tblRecept(ReceptID);
 
-
+CREATE PROCEDURE Get_AllRecepts 
+AS
+	select * from tblRecept
+	left join tblType on tblRecept.TypeID=tblType.TypeID
 GO
-CREATE VIEW vwRecept AS
-	SELECT	tblRecept.*,
-			tblComponents.ComponentAmount,tblComponents.ComponentName,tblComponents.ComponentID
-	From tblRecept,tblComponents
-	WHERE	tblRecept.ReceptID = tblComponents.ReceptID;
+
+exec Get_AllRecepts
