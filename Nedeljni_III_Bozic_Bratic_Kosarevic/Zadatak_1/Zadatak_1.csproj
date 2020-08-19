@@ -98,11 +98,7 @@
   <ItemGroup>
     <None Include="App.config" />
   </ItemGroup>
-<<<<<<< HEAD
-=======
-<<<<<<< Updated upstream
-=======
->>>>>>> Branch_Marija_Bozic
+
   <ItemGroup>
     <Folder Include="Files\" />
     <Folder Include="ViewModel\" />
@@ -117,8 +113,7 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
   </ItemGroup>
-<<<<<<< HEAD
-=======
+
   <ItemGroup>
     <Content Include="StoreProcedures\Get_AllRecepts.sql" />
     <Content Include="StoreProcedures\Get_AllReceptsSortedByComponentsASC.sql" />
@@ -132,7 +127,6 @@
     <Content Include="StoreProcedures\LogIn.sql" />
     <Content Include="StoreProcedures\Registration.sql" />
   </ItemGroup>
->>>>>>> Stashed changes
->>>>>>> Branch_Marija_Bozic
+
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
