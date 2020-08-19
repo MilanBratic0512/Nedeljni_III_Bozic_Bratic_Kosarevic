@@ -62,10 +62,13 @@ Add foreign key (TypeID) references tblType(TypeID);
 Alter Table tblComponents
 Add foreign key (ReceptID) references tblRecept(ReceptID);
 
+--insert into tblRecept values(2, 1, 'Recepie 1', 5, 'Author 1', 'Recepie Text 1', '1-1-2020')
+--insert into tblRecept values(2, 1, 'Recepie 1', 5, 'Author 1', 'Recepie Text 1', '1-1-2020')
+--insert into tblRecept values(2, 1, 'Recepie 1', 5, 'Author 1', 'Recepie Text 1', '1-1-2020')
+
+
 CREATE PROCEDURE Get_AllRecepts 
 AS
 	select * from tblRecept
 	left join tblType on tblRecept.TypeID=tblType.TypeID
 GO
-
-exec Get_AllRecepts
