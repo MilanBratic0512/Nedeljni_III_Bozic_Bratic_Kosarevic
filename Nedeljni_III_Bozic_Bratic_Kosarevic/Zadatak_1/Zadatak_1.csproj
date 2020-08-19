@@ -94,8 +94,7 @@
   <ItemGroup>
     <None Include="App.config" />
   </ItemGroup>
-<<<<<<< Updated upstream
-=======
+
   <ItemGroup>
     <Folder Include="Files\" />
     <Folder Include="ViewModel\" />
@@ -123,6 +122,6 @@
     <Content Include="StoreProcedures\LogIn.sql" />
     <Content Include="StoreProcedures\Registration.sql" />
   </ItemGroup>
->>>>>>> Stashed changes
+
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
