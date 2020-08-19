@@ -65,7 +65,6 @@
     <Compile Include="Models\Type.cs" />
     <Compile Include="Models\User.cs" />
     <Compile Include="Validations\UserValidation.cs" />
-    <Compile Include="ViewModel\RecepieViewModel.cs" />
     <Compile Include="View\LoginWindow.xaml.cs">
       <DependentUpon>LoginWindow.xaml</DependentUpon>
     </Compile>
@@ -99,8 +98,10 @@
   <ItemGroup>
     <None Include="App.config" />
   </ItemGroup>
+
   <ItemGroup>
     <Folder Include="Files\" />
+    <Folder Include="ViewModel\" />
   </ItemGroup>
   <ItemGroup>
     <Page Include="View\LoginWindow.xaml">
@@ -112,6 +113,7 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
   </ItemGroup>
+
   <ItemGroup>
     <Content Include="StoreProcedures\Get_AllRecepts.sql" />
     <Content Include="StoreProcedures\Get_AllReceptsSortedByComponentsASC.sql" />
@@ -125,5 +127,6 @@
     <Content Include="StoreProcedures\LogIn.sql" />
     <Content Include="StoreProcedures\Registration.sql" />
   </ItemGroup>
+
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
