@@ -94,5 +94,35 @@
   <ItemGroup>
     <None Include="App.config" />
   </ItemGroup>
+<<<<<<< Updated upstream
+=======
+  <ItemGroup>
+    <Folder Include="Files\" />
+    <Folder Include="ViewModel\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Page Include="View\LoginWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\RecepieWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="StoreProcedures\Get_AllRecepts.sql" />
+    <Content Include="StoreProcedures\Get_AllReceptsSortedByComponentsASC.sql" />
+    <Content Include="StoreProcedures\Get_AllReceptsSortedByComponentsDESC.sql" />
+    <Content Include="StoreProcedures\Get_AllReceptsSortedByDate.sql" />
+    <Content Include="StoreProcedures\Get_AllReceptsSortedByDateDESC.sql" />
+    <Content Include="StoreProcedures\Get_AllReceptsSortedByNameASC.sql" />
+    <Content Include="StoreProcedures\Get_AllReceptsSortedByNameDESC.sql" />
+    <Content Include="StoreProcedures\Insert_Components.sql" />
+    <Content Include="StoreProcedures\Insert_Recept.sql" />
+    <Content Include="StoreProcedures\LogIn.sql" />
+    <Content Include="StoreProcedures\Registration.sql" />
+  </ItemGroup>
+>>>>>>> Stashed changes
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

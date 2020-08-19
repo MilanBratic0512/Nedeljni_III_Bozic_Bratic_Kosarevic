@@ -24,7 +24,7 @@ create table tblUser (
 UserID int identity(1,1) primary key,
 FullName nvarchar (50) not null,
 Username nvarchar (50) unique not null,
-Pasword nvarchar (50) unique not null 
+Password nvarchar (100)  not null 
 )
 create table tblType(
 TypeID int identity(1,1) primary key,
@@ -36,10 +36,9 @@ ReceptID int identity(1,1) primary key,
 UserID int not null,
 TypeID int not null,
 ReceptName nvarchar(100) not null,
-ReceptType nvarchar (20) not null,
 PersonNumber int not null,
 Author nvarchar(100) not null,
-ReceptText nvarchar(100) not null,
+ReceptText nvarchar(400) not null,
 CreationDate date not null
 )
 
