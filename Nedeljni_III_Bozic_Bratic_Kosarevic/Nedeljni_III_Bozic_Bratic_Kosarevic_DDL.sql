@@ -50,7 +50,7 @@ ComponentName nvarchar(50) not null,
 ComponentAmount int not null
 )
 
-Insert into tblUser values ('Admin Name','Admin','Admin123');
+Insert into tblUser values ('Admin Name','Admin',';a,u???C_????/?-myZ?Z?jc?zS?');
 Insert into tblType values ('Appetizer')
 Insert into tblType values ('Main course');
 Insert into tblType values ('Dessert');
@@ -69,9 +69,4 @@ CREATE VIEW vwRecept AS
 	SELECT	tblRecept.*,
 			tblComponents.ComponentAmount,tblComponents.ComponentName,tblComponents.ComponentID
 	From tblRecept,tblComponents
-	WHERE	tblRecept.ReceptID = tblComponents.ReceptID
-
-
-
-	
-
+	WHERE	tblRecept.ReceptID = tblComponents.ReceptID;
