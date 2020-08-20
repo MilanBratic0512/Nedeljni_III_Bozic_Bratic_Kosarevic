@@ -6,10 +6,9 @@ using System.Threading.Tasks;
 
 namespace Zadatak_1.Models
 {
-    public class Type
+    public class ReceptType
     {
         public  int TypeID { get; set; }
         public string TypeName { get; set; }
-
     }
 }

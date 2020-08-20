@@ -65,8 +65,9 @@
     <Compile Include="Converters\BoolToVisibilityInverseConverter.cs" />
     <Compile Include="Models\Components.cs" />
     <Compile Include="Models\Recept.cs" />
-    <Compile Include="Models\Type.cs" />
+    <Compile Include="Models\ReceptType.cs" />
     <Compile Include="Models\User.cs" />
+    <Compile Include="Service\ServiceCode.cs" />
     <Compile Include="Validations\UserValidation.cs" />
     <Compile Include="ViewModel\AddEditReceptViewModel.cs" />
     <Compile Include="ViewModel\ViewModelBase.cs" />
@@ -125,12 +126,16 @@
     </Page>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="StoreProcedures\Get_AllReceptsByComponents.sql" />
+    <Content Include="StoreProcedures\Get_AllReceptsByName.sql" />
+    <Content Include="StoreProcedures\Get_AllReceptsByType.sql" />
     <Content Include="StoreProcedures\Get_AllReceptsSortedByComponentsASC.sql" />
     <Content Include="StoreProcedures\Get_AllReceptsSortedByComponentsDESC.sql" />
     <Content Include="StoreProcedures\Get_AllReceptsSortedByDate.sql" />
     <Content Include="StoreProcedures\Get_AllReceptsSortedByDateDESC.sql" />
     <Content Include="StoreProcedures\Get_AllReceptsSortedByNameASC.sql" />
     <Content Include="StoreProcedures\Get_AllReceptsSortedByNameDESC.sql" />
+    <Content Include="StoreProcedures\Get_AllTypes.sql" />
     <Content Include="StoreProcedures\Insert_Components.sql" />
     <Content Include="StoreProcedures\Insert_Recept.sql" />
     <Content Include="StoreProcedures\LogIn.sql" />

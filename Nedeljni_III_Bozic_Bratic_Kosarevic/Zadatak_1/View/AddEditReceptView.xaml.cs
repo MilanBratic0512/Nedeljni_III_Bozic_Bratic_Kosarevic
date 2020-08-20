@@ -21,7 +21,7 @@ namespace Zadatak_1.View
     /// </summary>
     public partial class AddEditReceptView : Window
     {
-        public AddEditReceptView( bool isForEdit)
+        public AddEditReceptView(bool isForEdit)
         {
             InitializeComponent();
             this.DataContext = new AddEditReceptViewModel(this, isForEdit);
