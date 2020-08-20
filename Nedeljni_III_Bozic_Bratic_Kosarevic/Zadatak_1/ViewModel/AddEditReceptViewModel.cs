@@ -92,9 +92,81 @@ namespace Zadatak_1.ViewModel
                 OnPropertyChanged("Components");
             }
         }
+
+        private string componentName;
+        public string ComponentName
+        {
+            get
+            {
+                return componentName;
+            }
+            set
+            {
+                componentName = value;
+                OnPropertyChanged("ComponentName");
+            }
+        }
+
+        private int componentAmount;
+        public int ComponentAmount
+        {
+            get
+            {
+                return componentAmount;
+            }
+            set
+            {
+                componentAmount = value;
+                OnPropertyChanged("ComponentAmount");
+            }
+        }
+
+        private ObservableCollection<Components> temporaryComponentList = new ObservableCollection<Components>();
+        public ObservableCollection<Components> TemporaryComponentList
+        {
+            get
+            {
+                return temporaryComponentList;
+            }
+            set
+            {
+                temporaryComponentList = value;
+                OnPropertyChanged("TemporaryComponentList");
+            }
+        }
         #endregion
 
         #region Commands
+        
+        private ICommand addComponentToList;
+
+        public ICommand AddComponentToList
+        {
+            get
+            {
+                if (addComponentToList == null)
+                {
+                    addComponentToList = new RelayCommand(param => AddAddComponentToListExecute());
+                }
+                return addComponentToList;
+            }
+        }
+
+        private void AddAddComponentToListExecute()
+        {
+            Components component = new Components();
+            component.ComponentName = ComponentName;
+            component.ComponentAmount = ComponentAmount;
+            try
+            {
+                temporaryComponentList.Add(component);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.ToString());
+            }
+        }
+
         private ICommand save;
 
         public ICommand Save
@@ -121,13 +193,27 @@ namespace Zadatak_1.ViewModel
                     int receptId = service.AddRecept(Recept);
                     if (receptId != 0)
                     {
+                        foreach (Components component in TemporaryComponentList)
+                        {
+                            component.ReceptId = receptId;
+                        }
+
+                        foreach(Components component in TemporaryComponentList)
+                        {
+                            service.AddComponent(component);
+                        }
                         MessageBox.Show("You have successfully added new recept");
-                        components.ReceptId = receptId;                        
+                        RecepieWindow recepieWindowWindow = new RecepieWindow();
+                        recepieWindowWindow.Show();
+                        addEditReceptView.Close();
                     }                    
                 }
                 else
                 {
-                    
+                    Recept.TypeId = selectedReceptTyps.TypeID;
+                    Recept.UserId = LoginWindow.CurrentUser.UserId;
+                    Recept.Author = LoginWindow.CurrentUser.FullName;
+                    Recept.CreationDate = DateTime.Now;
                 }
             }
             catch (Exception ex)

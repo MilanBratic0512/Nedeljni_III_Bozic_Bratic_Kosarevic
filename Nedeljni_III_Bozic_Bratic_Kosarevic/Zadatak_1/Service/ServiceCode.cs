@@ -89,5 +89,38 @@ namespace Zadatak_1.Service
             }
             return recept.ReceptId;
         }
+        public int AddComponent(Components component)
+        {
+            using (SqlConnection conn = new SqlConnection(ConfigurationManager.ConnectionStrings["con"].ToString()))
+            {
+                conn.Open();
+                try
+                {
+                    using (SqlCommand cmd = conn.CreateCommand())
+                    {
+                        cmd.CommandText = "Insert_Components";
+                        cmd.CommandType = CommandType.StoredProcedure;
+                        cmd.Parameters.AddWithValue("@ReceptID", component.ReceptId);
+                        cmd.Parameters.AddWithValue("@ComponentName", component.ComponentName);
+                        cmd.Parameters.AddWithValue("@ComponentAmount", component.ComponentAmount);
+                        SqlDataReader reader = cmd.ExecuteReader();
+                        if (reader.Read())
+                        {
+                            component.ComponentId = int.Parse(reader.GetValue(0).ToString());
+                        }
+                    }
+                }
+                catch (Exception ex)
+                {
+                    System.Diagnostics.Debug.WriteLine("Exeption" + ex.Message.ToString());
+                    return 0;
+                }
+                finally
+                {
+                    conn.Close();
+                }
+            }
+            return component.ComponentId;
+        }
     }
 }

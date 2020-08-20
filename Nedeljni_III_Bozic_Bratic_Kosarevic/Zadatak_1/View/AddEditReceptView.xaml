@@ -68,11 +68,7 @@
         <Label Grid.Column="4" Grid.Row="9" Name="lblValidationReceptReceptTypesList" Grid.ColumnSpan="7" Grid.RowSpan="5" Padding="0" HorizontalAlignment="Right"/>
         <Label Grid.Column="9" Grid.Row="3" Name="lblComponents" Content="Components:" Padding="0" HorizontalAlignment="Right"/>
         <Label Grid.Column="11" Grid.Row="5" Name="lblComponentAmount" Content="kom/g" Padding="0" HorizontalAlignment="Right"/>
-        <Label Grid.Column="11" Grid.Row="7" Name="lblComponentAmount1" Content="kom/g" Padding="0" HorizontalAlignment="Right"/>
-        <Label Grid.Column="11" Grid.Row="9" Name="lblComponentAmount2" Content="kom/g" Padding="0" HorizontalAlignment="Right"/>
-        <Label Grid.Column="11" Grid.Row="11" Name="lblComponentAmount3" Content="kom/g" Padding="0" HorizontalAlignment="Right"/>
-        <Label Grid.Column="11" Grid.Row="13" Name="lblComponentAmount4" Content="kom/g" Padding="0" HorizontalAlignment="Right"/>
-        <Label Grid.Column="11" Grid.Row="15" Name="lblComponentAmount15" Content="kom/g" Padding="0" HorizontalAlignment="Right"/>
+
         <TextBox Grid.Column="3" Grid.Row="3" Name="txtReceptName" Height="20" Width="100"
                 
                  Text="{Binding Recept.ReceptName, UpdateSourceTrigger=PropertyChanged}"/>        
@@ -83,34 +79,37 @@
                   DisplayMemberPath="TypeName" Text="Select type" IsEditable="True"
                   ItemsSource="{Binding ReceptTypsList, UpdateSourceTrigger=PropertyChanged}"                 
                   SelectedItem="{Binding SelectedReceptTyps, UpdateSourceTrigger=PropertyChanged}"
-
                   />
         <TextBox Grid.Column="3" Grid.Row="9" Name="txtReceptText" Grid.ColumnSpan="5" Grid.RowSpan="9" Height="150" Width="200" HorizontalAlignment="Left"                
                  Text="{Binding Recept.ReceptText, UpdateSourceTrigger=PropertyChanged}"/>       
         <TextBox Grid.Column="9" Grid.Row="5" Name="txtComponentName" Grid.ColumnSpan="3" Height="20" Width="100" HorizontalAlignment="Left"                    
-                 Text="{Binding Components.ComponentName, UpdateSourceTrigger=PropertyChanged}"/>
-        <TextBox Grid.Column="9" Grid.Row="7" Name="txtComponentName1" Grid.ColumnSpan="3" Height="20" Width="100" HorizontalAlignment="Left"                     
-                 Text="{Binding Components.ComponentName, UpdateSourceTrigger=PropertyChanged}"/>
-        <TextBox Grid.Column="9" Grid.Row="9" Name="txtComponentName2" Grid.ColumnSpan="3" Height="20" Width="100" HorizontalAlignment="Left"                      
-                 Text="{Binding Components.ComponentName, UpdateSourceTrigger=PropertyChanged}"/>
-        <TextBox Grid.Column="9" Grid.Row="11" Name="txtComponentName3" Grid.ColumnSpan="3" Height="20" Width="100" HorizontalAlignment="Left"                     
-                 Text="{Binding Components.ComponentName, UpdateSourceTrigger=PropertyChanged}"/>
-        <TextBox Grid.Column="9" Grid.Row="13" Name="txtComponentName4" Grid.ColumnSpan="3" Height="20" Width="100" HorizontalAlignment="Left"                      
-                 Text="{Binding Components.ComponentName, UpdateSourceTrigger=PropertyChanged}"/>
-        <TextBox Grid.Column="9" Grid.Row="15" Name="txtComponentName5" Grid.ColumnSpan="3" Height="20" Width="100" HorizontalAlignment="Left"                      
-                 Text="{Binding Components.ComponentName, UpdateSourceTrigger=PropertyChanged}"/>
+                 Text="{Binding ComponentName, UpdateSourceTrigger=PropertyChanged}"/>
+
         <TextBox Grid.Column="11" Grid.Row="5" Name="txtComponentAmount" Height="20" Width="50"  HorizontalAlignment="Left"                    
-                 Text="{Binding Components.ComponentAmount, UpdateSourceTrigger=PropertyChanged}"/>
-        <TextBox Grid.Column="11" Grid.Row="7" Name="txtComponentAmount1" Height="20" Width="50"  HorizontalAlignment="Left"                    
-                 Text="{Binding Components.ComponentAmount, UpdateSourceTrigger=PropertyChanged}"/>
-        <TextBox Grid.Column="11" Grid.Row="9" Name="txtComponentAmount2" Height="20" Width="50"  HorizontalAlignment="Left"                    
-                 Text="{Binding Components.ComponentAmount, UpdateSourceTrigger=PropertyChanged}"/>
-        <TextBox Grid.Column="11" Grid.Row="11" Name="txtComponentAmount4" Height="20" Width="50"  HorizontalAlignment="Left"                    
-                 Text="{Binding Components.ComponentAmount, UpdateSourceTrigger=PropertyChanged}"/>
-        <TextBox Grid.Column="11" Grid.Row="13" Name="txtComponentAmount5" Height="20" Width="50"  HorizontalAlignment="Left"                    
-                 Text="{Binding Components.ComponentAmount, UpdateSourceTrigger=PropertyChanged}"/>
-        <TextBox Grid.Column="11" Grid.Row="15" Name="txtComponentAmount6" Height="20" Width="50"  HorizontalAlignment="Left"                    
-                 Text="{Binding Components.ComponentAmount, UpdateSourceTrigger=PropertyChanged}"/>
+                 Text="{Binding ComponentAmount, UpdateSourceTrigger=PropertyChanged}"/>
+        <DataGrid Grid.Column="9" Grid.Row="7" Grid.RowSpan="11" Name="DataGridResults" ItemsSource="{Binding TemporaryComponentList, UpdateSourceTrigger=PropertyChanged}" HorizontalAlignment="Left"
+              Grid.ColumnSpan="5" Width="230" IsReadOnly="True" HorizontalScrollBarVisibility="Visible" VerticalScrollBarVisibility="Visible" HeadersVisibility="Column" AutoGenerateColumns="False" HorizontalGridLinesBrush="Black" BorderBrush="Black" Foreground="Black" FontWeight="Bold">
+            <DataGrid.Columns>
+                <DataGridTextColumn Header="Component" Binding="{Binding ComponentName}" Width="100"/>
+                <DataGridTextColumn Header="Amount" Binding="{Binding ComponentAmount}" Width="60"/>
+                <DataGridTemplateColumn Header="Delete" Width="50">
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <StackPanel Width="150" Orientation="Horizontal">
+                                <Button Name="btnDeleteComponent" Content="Delete" Width="60" Height="20"
+                                         FontWeight="Bold" Margin="0" HorizontalAlignment="Left"                                        
+                                        />
+                            </StackPanel>
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
+            </DataGrid.Columns>
+        </DataGrid>
+
+        <Button Grid.Column="13" Grid.Row="5" Name="btnAdd" Content="Add" IsEnabled="True" Height="20" 
+                Visibility="{Binding IsForEdit, Converter={StaticResource BoolToVisibilityInverseConverter}}"
+                Width="70" HorizontalAlignment="Left" Command="{Binding AddComponentToList, UpdateSourceTrigger=PropertyChanged}"
+                />
         <Button Grid.Column="5" Grid.Row="19" Name="btnSave" Content="Add" IsEnabled="True" Height="20" 
                 Visibility="{Binding IsForEdit, Converter={StaticResource BoolToVisibilityInverseConverter}}"
                 Width="70" HorizontalAlignment="Left" Command="{Binding Save, UpdateSourceTrigger=PropertyChanged}"
