@@ -51,7 +51,7 @@ namespace Zadatak_1.View
 
         private void DeleteRecepie(object sender, RoutedEventArgs e)
         {
-            
+            rvm.DeleteRecepie();
         }
     }
 }

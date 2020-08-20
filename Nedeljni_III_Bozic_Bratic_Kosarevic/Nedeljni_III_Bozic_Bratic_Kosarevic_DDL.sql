@@ -62,13 +62,35 @@ Add foreign key (TypeID) references tblType(TypeID);
 Alter Table tblComponents
 Add foreign key (ReceptID) references tblRecept(ReceptID);
 
---insert into tblRecept values(2, 1, 'Recepie 1', 5, 'Author 1', 'Recepie Text 1', '1-1-2020')
---insert into tblRecept values(2, 1, 'Recepie 1', 5, 'Author 1', 'Recepie Text 1', '1-1-2020')
---insert into tblRecept values(2, 1, 'Recepie 1', 5, 'Author 1', 'Recepie Text 1', '1-1-2020')
+insert into tblUser values('Aca', 'aca', 'A?????s?e8?B0F?]???\f?l%H?%');
+--Password acasaca
+insert into tblRecept values(2, 1, 'Recepie 1', 5, 'Author 1', 'Recepie Text 1', '1-1-2020');
+insert into tblRecept values(2, 1, 'Recepie 2', 5, 'Author 1', 'Recepie Text 1', '1-1-2019');
+insert into tblRecept values(2, 1, 'Recepie 3', 5, 'Author 1', 'Recepie Text 1', '1-1-2018');
 
+insert into tblComponents values (1, 'mesto', 3);
+insert into tblComponents values (1, 'mleko', 3);
+insert into tblComponents values (1, 'jaja', 3);
+insert into tblComponents values (2, 'mesto', 3);
+insert into tblComponents values (1, 'mleko', 3);
+insert into tblComponents values (3, 'jaja', 3);
+insert into tblComponents values (3, 'mesto', 3);
+insert into tblComponents values (3, 'mleko', 3);
+insert into tblComponents values (2, 'jaja', 3);
+
+select * from tblRecept
+select * from tblUser
+exec Get_AllReceptsComponentsNumber @ReceptID = 1;
 
 CREATE PROCEDURE Get_AllRecepts 
 AS
 	select * from tblRecept
 	left join tblType on tblRecept.TypeID=tblType.TypeID
+GO
+
+CREATE PROCEDURE Get_AllReceptsComponentsNumber @ReceptID int
+AS
+SELECT COUNT(*) NumberOfComponents FROM tblComponents c
+left join tblRecept r on r.ReceptID=c.ReceptID
+where c.ReceptID = @ReceptID
 GO

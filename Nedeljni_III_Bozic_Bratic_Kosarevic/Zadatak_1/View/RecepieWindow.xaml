@@ -16,6 +16,7 @@ Height="288" Width="772" Margin="10,87,10,44" HorizontalAlignment="Center" Selec
                 <DataGridTextColumn Header="Recepie Title" Binding="{Binding ReceptName}" IsReadOnly="True"/>
                 <DataGridTextColumn Header="Recepie Type" Binding="{Binding ReceptType}" IsReadOnly="True"/>
                 <DataGridTextColumn Header="Persons" Binding="{Binding PersonNumber}" IsReadOnly="True" />
+                <DataGridTextColumn Header="Components" Binding="{Binding ComponentsNumber}" IsReadOnly="True" />
                 <DataGridTextColumn Header="Creation Date" Binding="{Binding CreationDate, StringFormat=dd/MM/yyyy}" IsReadOnly="True" />
                 <DataGridTemplateColumn Header="Edit">
                     <DataGridTemplateColumn.CellTemplate>

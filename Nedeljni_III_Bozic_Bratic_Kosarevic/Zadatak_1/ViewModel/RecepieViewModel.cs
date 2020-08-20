@@ -78,10 +78,39 @@ namespace Zadatak_1.ViewModel
                         r.CanDelete = true;
                     }
 
+                    using (SqlConnection conn1 = new SqlConnection(ConfigurationManager.ConnectionStrings["con"].ToString()))
+                    {
+                        SqlCommand query1 = new SqlCommand(@"exec Get_AllReceptsComponentsNumber @ReceptID = @Id;", conn1);
+                        query1.Parameters.AddWithValue("@Id", r.ReceptId);
+                        conn1.Open();
+                        SqlDataAdapter sqlDataAdapter1 = new SqlDataAdapter(query1);
+                        DataTable dataTable1 = new DataTable();
+                        sqlDataAdapter1.Fill(dataTable1);
+
+                        foreach (DataRow row1 in dataTable1.Rows)
+                        {
+                            r.ComponentsNumber = int.Parse(row1[0].ToString());
+                        }
+                    }
+
                     Recepies.Add(r);
                 }
             }
-        }       
+        }
+
+        public void DeleteRecepie()
+        {
+            using (var conn = new SqlConnection(ConfigurationManager.ConnectionStrings["con"].ToString()))
+            {
+                var cmd = new SqlCommand(@"Delete from tblRecept where ReceptID=@RecepieID;", conn);
+                cmd.Parameters.AddWithValue("@RecepieID", recepie.ReceptId);
+                conn.Open();
+                cmd.ExecuteNonQuery();
+                conn.Close();
+                MessageBoxResult messageBoxResult = System.Windows.MessageBox.Show("Recepie successfully deleted.", "Notification");
+                Recepies.Remove(recepie);
+            }
+        }
 
         public event PropertyChangedEventHandler PropertyChanged;
 

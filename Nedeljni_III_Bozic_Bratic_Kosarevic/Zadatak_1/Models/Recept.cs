@@ -19,6 +19,7 @@ namespace Zadatak_1.Models
         public DateTime CreationDate { get; set; }
         public bool CanEdit { get; set; }
         public bool CanDelete { get; set; }
+        public int ComponentsNumber { get; set; }
 
     }
 }
