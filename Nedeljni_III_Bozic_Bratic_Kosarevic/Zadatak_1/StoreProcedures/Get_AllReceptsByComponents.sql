@@ -1,4 +1,5 @@
-CREATE PROCEDURE Get_AllReceptsByComponents
+CREATE OR ALTER PROCEDURE Get_AllReceptsByComponents
+
  @searchComponent nvarchar(MAX)
  as
 
