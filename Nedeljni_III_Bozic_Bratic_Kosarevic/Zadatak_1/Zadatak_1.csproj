@@ -125,7 +125,6 @@
     </Page>
   </ItemGroup>
   <ItemGroup>
-    <Content Include="StoreProcedures\Get_AllRecepts.sql" />
     <Content Include="StoreProcedures\Get_AllReceptsSortedByComponentsASC.sql" />
     <Content Include="StoreProcedures\Get_AllReceptsSortedByComponentsDESC.sql" />
     <Content Include="StoreProcedures\Get_AllReceptsSortedByDate.sql" />

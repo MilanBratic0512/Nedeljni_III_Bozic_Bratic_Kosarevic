@@ -26,5 +26,12 @@ namespace Zadatak_1.View
             InitializeComponent();
             this.DataContext = new AddEditReceptViewModel(this, isForEdit);
         }
+
+        private void btnQuit_Click(object sender, RoutedEventArgs e)
+        {
+            RecepieWindow recepieWindowWindow = new RecepieWindow();
+            recepieWindowWindow.Show();
+            Close();
+        }
     }
 }

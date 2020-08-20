@@ -113,6 +113,7 @@
                 Width="70" HorizontalAlignment="Left" Command="{Binding Save, UpdateSourceTrigger=PropertyChanged}"
                 />
         <Button Grid.Column="9" Grid.Row="19" Name="btnQuit" Content="Quit" IsEnabled="True" Height="20" 
-                Width="70" HorizontalAlignment="Left" Command="{Binding Quit, UpdateSourceTrigger=PropertyChanged}"/>
+                Width="70" HorizontalAlignment="Left" Click="btnQuit_Click"
+                />
     </Grid>
 </Window>
