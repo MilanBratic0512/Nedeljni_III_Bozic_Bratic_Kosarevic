@@ -1,0 +1,33 @@
+﻿<Window x:Class="Zadatak_1.View.ShoppingCartView"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Zadatak_1.View"
+        mc:Ignorable="d"
+        Title="ShoppingCartView" Height="450" Width="800">
+    <Grid>
+        <DataGrid x:Name="datagrid2" ItemsSource="{Binding AllComponents}" AutoGenerateColumns="False" CanUserAddRows="False"
+Height="288" Width="772" Margin="10,87,10,44" HorizontalAlignment="Center" >
+            <DataGrid.Columns>
+                <DataGridTextColumn Header="Component name" Binding="{Binding ComponentName}" IsReadOnly="True"/>
+                <DataGridTextColumn Header="Component amount" Binding="{Binding ComponentAmount}" IsReadOnly="True"/>
+                <DataGridTemplateColumn Header="Add to cart">
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <Button IsEnabled="{Binding CanAddToCart}" Click="AddToCart" Content="cart"/>
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
+
+            </DataGrid.Columns>
+        </DataGrid>
+        <DataGrid x:Name="datagrid3" ItemsSource="{Binding ShoppingCart}" AutoGenerateColumns="False" CanUserAddRows="False" Width="772" Margin="10,275,10,44" HorizontalAlignment="Center" SelectedItem="{Binding Component, UpdateSourceTrigger=Default}">
+            <DataGrid.Columns>
+                <DataGridTextColumn Header="Component name" Binding="{Binding ComponentName}" IsReadOnly="True"/>
+                <DataGridTextColumn Header="Component amount" Binding="{Binding ComponentAmount}" IsReadOnly="True"/>
+            </DataGrid.Columns>
+        </DataGrid>
+        <Button Content="Buy" HorizontalAlignment="Left" Margin="10,380,0,0" VerticalAlignment="Top" Width="75" Click="Buy"/>
+    </Grid>
+</Window>

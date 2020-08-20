@@ -53,12 +53,10 @@ namespace Zadatak_1.View
         {
             rvm.DeleteRecepie();
         }
-
         private void ShoppingCart(object sender, RoutedEventArgs e)
         {
             ShoppingCartView shoppingCartView = new ShoppingCartView();
             shoppingCartView.Show();
         }
-
     }
 }
