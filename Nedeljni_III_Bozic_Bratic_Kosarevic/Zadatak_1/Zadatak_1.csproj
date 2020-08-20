@@ -60,12 +60,20 @@
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="Commands\RelayCommand.cs" />
+    <Compile Include="Converters\BoolToVisibilityConverter.cs" />
+    <Compile Include="Converters\BoolToVisibilityInverseConverter.cs" />
     <Compile Include="Models\Components.cs" />
     <Compile Include="Models\Recept.cs" />
     <Compile Include="Models\Type.cs" />
     <Compile Include="Models\User.cs" />
     <Compile Include="Validations\UserValidation.cs" />
+    <Compile Include="ViewModel\AddEditReceptViewModel.cs" />
+    <Compile Include="ViewModel\ViewModelBase.cs" />
     <Compile Include="ViewModel\RecepieViewModel.cs" />
+    <Compile Include="View\AddEditReceptView.xaml.cs">
+      <DependentUpon>AddEditReceptView.xaml</DependentUpon>
+    </Compile>
     <Compile Include="View\LoginWindow.xaml.cs">
       <DependentUpon>LoginWindow.xaml</DependentUpon>
     </Compile>
@@ -103,6 +111,10 @@
     <Folder Include="Files\" />
   </ItemGroup>
   <ItemGroup>
+    <Page Include="View\AddEditReceptView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="View\LoginWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>

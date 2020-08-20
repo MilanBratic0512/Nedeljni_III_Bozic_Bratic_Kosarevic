@@ -30,7 +30,9 @@ namespace Zadatak_1.View
 
         private void AddNewRecepie(object sender, RoutedEventArgs e)
         {
-
+            AddEditReceptView addEditReceptWindow = new AddEditReceptView(false);
+            addEditReceptWindow.Show();
+            Close();
         }
 
         private void Logout(object sender, RoutedEventArgs e)
@@ -42,7 +44,9 @@ namespace Zadatak_1.View
 
         private void EditRecepie(object sender, RoutedEventArgs e)
         {
-            
+            AddEditReceptView addEditReceptWindow = new AddEditReceptView(true);
+            addEditReceptWindow.Show();
+            Close();
         }
 
         private void DeleteRecepie(object sender, RoutedEventArgs e)

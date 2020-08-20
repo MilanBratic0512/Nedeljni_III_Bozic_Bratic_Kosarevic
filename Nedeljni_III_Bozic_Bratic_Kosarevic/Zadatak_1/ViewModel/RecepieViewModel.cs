@@ -9,6 +9,7 @@ using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
 using Zadatak_1.Models;
 using Zadatak_1.View;
 
@@ -80,7 +81,7 @@ namespace Zadatak_1.ViewModel
                     Recepies.Add(r);
                 }
             }
-        }
+        }       
 
         public event PropertyChangedEventHandler PropertyChanged;
 
