@@ -65,6 +65,20 @@ namespace Zadatak_1.ViewModel
             }
         }
 
+        private Components selectedComponents;
+        public Components SelectedComponents
+        {
+            get
+            {
+                return selectedComponents;
+            }
+            set
+            {
+                selectedComponents = value;
+                OnPropertyChanged("SelectedComponents");
+            }
+        }
+
         private Recept recept = new Recept();
         public Recept Recept
         {
@@ -136,23 +150,9 @@ namespace Zadatak_1.ViewModel
         }
         #endregion
 
-        #region Commands
-        
-        private ICommand addComponentToList;
+        #region        
 
-        public ICommand AddComponentToList
-        {
-            get
-            {
-                if (addComponentToList == null)
-                {
-                    addComponentToList = new RelayCommand(param => AddAddComponentToListExecute());
-                }
-                return addComponentToList;
-            }
-        }
-
-        private void AddAddComponentToListExecute()
+        public void AddAddComponentToList()
         {
             Components component = new Components();
             component.ComponentName = ComponentName;
@@ -160,6 +160,18 @@ namespace Zadatak_1.ViewModel
             try
             {
                 temporaryComponentList.Add(component);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.ToString());
+            }
+        }
+
+        public void DeleteComponentExecute()
+        {
+            try
+            {
+                temporaryComponentList.Remove(selectedComponents);
             }
             catch (Exception ex)
             {
@@ -210,10 +222,23 @@ namespace Zadatak_1.ViewModel
                 }
                 else
                 {
-                    Recept.TypeId = selectedReceptTyps.TypeID;
-                    Recept.UserId = LoginWindow.CurrentUser.UserId;
-                    Recept.Author = LoginWindow.CurrentUser.FullName;
-                    Recept.CreationDate = DateTime.Now;
+                    // int receptId = service.UpdateRecept(Recept);
+                    foreach (Components component in TemporaryComponentList)
+                    {
+                        if(component.ReceptId==0)
+                        {
+                            //component.ReceptId = receptId;
+                        }                        
+                    }
+
+                    foreach (Components component in TemporaryComponentList)
+                    {
+                        service.AddComponent(component);
+                    }
+                    MessageBox.Show("You have successfully changed recept");
+                    RecepieWindow recepieWindowWindow = new RecepieWindow();
+                    recepieWindowWindow.Show();
+                    addEditReceptView.Close();
                 }
             }
             catch (Exception ex)

@@ -59,36 +59,44 @@
         <Label Grid.Column="1" Grid.Row="1"  Visibility="{Binding IsForEdit, Converter={StaticResource BoolToVisibilityInverseConverter}}"  Grid.ColumnSpan="15" Name="lblNewRecept" Content="Add New recept:" Padding="0" HorizontalAlignment="Center"/>
         <Label Grid.Column="1" Grid.Row="1" Visibility="{Binding IsForEdit, Converter={StaticResource BoolToVisibilityConverter}}" Grid.ColumnSpan="15" Name="lblEditRecept" Content="Edit recept:" Padding="0" HorizontalAlignment="Center"/>
         <Label Grid.Column="1" Grid.Row="3" Name="lblReceptName" Content="Recept Name:" Padding="0" HorizontalAlignment="Right"/>
-        <Label Grid.Column="4" Grid.Row="3" Name="lblValidationReceptName" Padding="0" Grid.ColumnSpan="7" Grid.RowSpan="3" HorizontalAlignment="Right"/>
+        <Label Grid.Column="4" Grid.Row="3" Name="lblValidationReceptName" Padding="0" Grid.ColumnSpan="5" Grid.RowSpan="3" HorizontalAlignment="Left"/>
         <Label Grid.Column="1" Grid.Row="5" Grid.ColumnSpan="3" Name="lblForPerson" Content="For number of persons:" Padding="0" HorizontalAlignment="Left"/>
-        <Label Grid.Column="4" Grid.Row="5" Name="lblValidationPersonNumber" Padding="0" Grid.ColumnSpan="3" Grid.RowSpan="5" HorizontalAlignment="Right"/>
-        <Label Grid.Column="1" Grid.Row="7" Name="lblReceptText" Content="Recept text:" Padding="0" HorizontalAlignment="Right"/>
-        <Label Grid.Column="4" Grid.Row="7" Name="lblValidationReceptText" Grid.ColumnSpan="7" Grid.RowSpan="5" Padding="0" HorizontalAlignment="Right"/>
-        <Label Grid.Column="1" Grid.Row="9" Name="lblReceptTypesList" Content="Recept type:" Padding="0" HorizontalAlignment="Right"/>
+        <Label Grid.Column="4" Grid.Row="5" Name="lblValidationPersonNumber" Padding="0"  Grid.ColumnSpan="5" Grid.RowSpan="3" HorizontalAlignment="Right"/>
+        <Label Grid.Column="1" Grid.Row="9" Name="lblReceptText" Content="Recept text:" Padding="0" HorizontalAlignment="Right"/>
+        <Label Grid.Column="2" Grid.Row="7" Name="lblValidationReceptText" Grid.ColumnSpan="7" Grid.RowSpan="5" Padding="0" HorizontalAlignment="Right"/>
+        <Label Grid.Column="1" Grid.Row="7" Name="lblReceptTypesList" Content="Recept type:" Padding="0" HorizontalAlignment="Right"/>
         <Label Grid.Column="4" Grid.Row="9" Name="lblValidationReceptReceptTypesList" Grid.ColumnSpan="7" Grid.RowSpan="5" Padding="0" HorizontalAlignment="Right"/>
+        <Label Grid.Column="5" Grid.Row="5" Name="lblValidationComponentName" Grid.ColumnSpan="4" Grid.RowSpan="5" Padding="0" HorizontalAlignment="Right"/>
+        <Label Grid.Column="5" Grid.Row="5" Name="lblValidationComponentAmount" Grid.ColumnSpan="3" Grid.RowSpan="5" Padding="0" HorizontalAlignment="Right"/>
         <Label Grid.Column="9" Grid.Row="3" Name="lblComponents" Content="Components:" Padding="0" HorizontalAlignment="Right"/>
         <Label Grid.Column="11" Grid.Row="5" Name="lblComponentAmount" Content="kom/g" Padding="0" HorizontalAlignment="Right"/>
-
         <TextBox Grid.Column="3" Grid.Row="3" Name="txtReceptName" Height="20" Width="100"
-                
+                TextChanged="txtReceptName_TextChanged"
                  Text="{Binding Recept.ReceptName, UpdateSourceTrigger=PropertyChanged}"/>        
         <TextBox Grid.Column="3" Grid.Row="5" Name="txtPersonNumber" Height="20" Width="100"
-                 
+                 TextChanged="txtPersonNumber_TextChanged"
                  Text="{Binding Recept.PersonNumber, UpdateSourceTrigger=PropertyChanged}"/>
         <ComboBox Grid.Column="3" Grid.Row="7" Name="cmbReceptTyps" Height="20" Width="100" 
                   DisplayMemberPath="TypeName" Text="Select type" IsEditable="True"
                   ItemsSource="{Binding ReceptTypsList, UpdateSourceTrigger=PropertyChanged}"                 
                   SelectedItem="{Binding SelectedReceptTyps, UpdateSourceTrigger=PropertyChanged}"
+                  SelectionChanged="cmbReceptTyps_SelectionChanged"
                   />
         <TextBox Grid.Column="3" Grid.Row="9" Name="txtReceptText" Grid.ColumnSpan="5" Grid.RowSpan="9" Height="150" Width="200" HorizontalAlignment="Left"                
-                 Text="{Binding Recept.ReceptText, UpdateSourceTrigger=PropertyChanged}"/>       
+                 TextWrapping="Wrap" Text="{Binding Recept.ReceptText, UpdateSourceTrigger=PropertyChanged}"
+                 TextChanged="txtReceptText_TextChanged"
+                 />       
         <TextBox Grid.Column="9" Grid.Row="5" Name="txtComponentName" Grid.ColumnSpan="3" Height="20" Width="100" HorizontalAlignment="Left"                    
-                 Text="{Binding ComponentName, UpdateSourceTrigger=PropertyChanged}"/>
+                 Text="{Binding ComponentName, UpdateSourceTrigger=PropertyChanged}"
+                 Keyboard.KeyUp="txtComponentName_KeyUp" />
 
         <TextBox Grid.Column="11" Grid.Row="5" Name="txtComponentAmount" Height="20" Width="50"  HorizontalAlignment="Left"                    
+                Keyboard.KeyUp="txtComponentAmount_KeyUp"
                  Text="{Binding ComponentAmount, UpdateSourceTrigger=PropertyChanged}"/>
-        <DataGrid Grid.Column="9" Grid.Row="7" Grid.RowSpan="11" Name="DataGridResults" ItemsSource="{Binding TemporaryComponentList, UpdateSourceTrigger=PropertyChanged}" HorizontalAlignment="Left"
-              Grid.ColumnSpan="5" Width="230" IsReadOnly="True" HorizontalScrollBarVisibility="Visible" VerticalScrollBarVisibility="Visible" HeadersVisibility="Column" AutoGenerateColumns="False" HorizontalGridLinesBrush="Black" BorderBrush="Black" Foreground="Black" FontWeight="Bold">
+        <DataGrid Grid.Column="9" Grid.Row="7" Grid.RowSpan="11" Name="DataGridResults" ItemsSource="{Binding TemporaryComponentList, UpdateSourceTrigger=PropertyChanged}" HorizontalAlignment="Left"                  
+                  SelectedItem="{Binding SelectedComponents, UpdateSourceTrigger=PropertyChanged}"
+                  Grid.ColumnSpan="5" Width="230" IsReadOnly="True" HorizontalScrollBarVisibility="Visible" VerticalScrollBarVisibility="Visible" HeadersVisibility="Column" AutoGenerateColumns="False" HorizontalGridLinesBrush="Black" BorderBrush="Black" Foreground="Black" FontWeight="Bold"             
+                  >
             <DataGrid.Columns>
                 <DataGridTextColumn Header="Component" Binding="{Binding ComponentName}" Width="100"/>
                 <DataGridTextColumn Header="Amount" Binding="{Binding ComponentAmount}" Width="60"/>
@@ -97,7 +105,8 @@
                         <DataTemplate>
                             <StackPanel Width="150" Orientation="Horizontal">
                                 <Button Name="btnDeleteComponent" Content="Delete" Width="60" Height="20"
-                                         FontWeight="Bold" Margin="0" HorizontalAlignment="Left"                                        
+                                         FontWeight="Bold" Margin="0" HorizontalAlignment="Left" 
+                                        Click="btnDeleteComponent_Click"
                                         />
                             </StackPanel>
                         </DataTemplate>
@@ -106,11 +115,10 @@
             </DataGrid.Columns>
         </DataGrid>
 
-        <Button Grid.Column="13" Grid.Row="5" Name="btnAdd" Content="Add" IsEnabled="True" Height="20" 
+        <Button Grid.Column="13" Grid.Row="5" Name="btnAdd" Content="Add" IsEnabled="False" Height="20" 
                 Visibility="{Binding IsForEdit, Converter={StaticResource BoolToVisibilityInverseConverter}}"
-                Width="70" HorizontalAlignment="Left" Command="{Binding AddComponentToList, UpdateSourceTrigger=PropertyChanged}"
-                />
-        <Button Grid.Column="5" Grid.Row="19" Name="btnSave" Content="Add" IsEnabled="True" Height="20" 
+                Width="70" HorizontalAlignment="Left" Click="btnAdd_Click"/>
+        <Button Grid.Column="5" Grid.Row="19" Name="btnSave" Content="Add" IsEnabled="False" Height="20" 
                 Visibility="{Binding IsForEdit, Converter={StaticResource BoolToVisibilityInverseConverter}}"
                 Width="70" HorizontalAlignment="Left" Command="{Binding Save, UpdateSourceTrigger=PropertyChanged}"
                 />
