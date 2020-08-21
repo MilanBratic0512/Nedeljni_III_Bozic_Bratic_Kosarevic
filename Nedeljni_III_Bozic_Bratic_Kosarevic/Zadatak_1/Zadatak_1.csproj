@@ -67,6 +67,8 @@
     <Compile Include="Commands\RelayCommand.cs" />
     <Compile Include="Converters\BoolToVisibilityConverter.cs" />
     <Compile Include="Converters\BoolToVisibilityInverseConverter.cs" />
+    <Compile Include="Converters\DeleteBtnToVisibilitiConverter.cs" />
+    <Compile Include="Converters\EditBtnToVisibilitiConverter.cs" />
     <Compile Include="Models\Components.cs" />
     <Compile Include="Models\Recept.cs" />
     <Compile Include="Models\ReceptType.cs" />
@@ -74,6 +76,7 @@
     <Compile Include="Service\ServiceCode.cs" />
     <Compile Include="Validations\UserValidation.cs" />
     <Compile Include="ViewModel\AddEditReceptViewModel.cs" />
+    <Compile Include="ViewModel\ReceptDetailsViewModela.cs" />
     <Compile Include="ViewModel\ShoppingCartViewModel.cs" />
     <Compile Include="ViewModel\ViewModelBase.cs" />
     <Compile Include="ViewModel\RecepieViewModel.cs" />
@@ -85,6 +88,9 @@
     </Compile>
     <Compile Include="View\RecepieWindow.xaml.cs">
       <DependentUpon>RecepieWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\ReceptDetailsView.xaml.cs">
+      <DependentUpon>ReceptDetailsView.xaml</DependentUpon>
     </Compile>
     <Compile Include="View\ShoppingCartView.xaml.cs">
       <DependentUpon>ShoppingCartView.xaml</DependentUpon>
@@ -129,6 +135,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="View\RecepieWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\ReceptDetailsView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

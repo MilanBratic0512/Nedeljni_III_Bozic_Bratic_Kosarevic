@@ -182,6 +182,7 @@ namespace Zadatak_1.Service
                         cmd.Parameters.AddWithValue("@ReceptID", recept.ReceptId);
                         cmd.Parameters.AddWithValue("@UserID", recept.UserId);
                         cmd.Parameters.AddWithValue("@TypeID", recept.TypeId);
+                        cmd.Parameters.AddWithValue("@PersonNumber", recept.PersonNumber);
                         cmd.Parameters.AddWithValue("@ReceptName", recept.ReceptName);
                         cmd.Parameters.AddWithValue("@Author", recept.Author);
                         cmd.Parameters.AddWithValue("@ReceptText", recept.ReceptText);

@@ -115,8 +115,7 @@
             </DataGrid.Columns>
         </DataGrid>
 
-        <Button Grid.Column="13" Grid.Row="5" Name="btnAdd" Content="Add" IsEnabled="False" Height="20" 
-                Visibility="{Binding IsForEdit, Converter={StaticResource BoolToVisibilityInverseConverter}}"
+        <Button Grid.Column="13" Grid.Row="5" Name="btnAdd" Content="Add" IsEnabled="False" Height="20"                 
                 Width="70" HorizontalAlignment="Left" Click="btnAdd_Click"/>
         <Button Grid.Column="5" Grid.Row="19" Name="btnSave" Content="Add" IsEnabled="False" Height="20" 
                 Visibility="{Binding IsForEdit, Converter={StaticResource BoolToVisibilityInverseConverter}}"
