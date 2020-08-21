@@ -74,9 +74,7 @@
     <Compile Include="Service\ServiceCode.cs" />
     <Compile Include="Validations\UserValidation.cs" />
     <Compile Include="ViewModel\AddEditReceptViewModel.cs" />
-
     <Compile Include="ViewModel\ShoppingCartViewModel.cs" />
-
     <Compile Include="ViewModel\ViewModelBase.cs" />
     <Compile Include="ViewModel\RecepieViewModel.cs" />
     <Compile Include="View\AddEditReceptView.xaml.cs">
@@ -87,11 +85,9 @@
     </Compile>
     <Compile Include="View\RecepieWindow.xaml.cs">
       <DependentUpon>RecepieWindow.xaml</DependentUpon>
-
     </Compile>
     <Compile Include="View\ShoppingCartView.xaml.cs">
       <DependentUpon>ShoppingCartView.xaml</DependentUpon>
-
     </Compile>
   </ItemGroup>
   <ItemGroup>
@@ -136,7 +132,6 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-
     <Page Include="View\ShoppingCartView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -144,10 +139,11 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="StoreProcedures\Get_AllComponents.sql" />
-
+    <Content Include="StoreProcedures\Update_Component.sql" />
+    <Content Include="StoreProcedures\Update_Recept.sql" />
   </ItemGroup>
   <ItemGroup>
-
+    <Content Include="StoreProcedures\Get_AllComponentsByReceptId.sql" />
     <Content Include="StoreProcedures\Get_AllReceptsByComponents.sql" />
     <Content Include="StoreProcedures\Get_AllReceptsByName.sql" />
     <Content Include="StoreProcedures\Get_AllReceptsByType.sql" />

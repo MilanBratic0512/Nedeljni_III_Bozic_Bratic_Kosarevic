@@ -20,11 +20,14 @@ namespace Zadatak_1.ViewModel
         AddEditReceptView addEditReceptView;
         ServiceCode service = new ServiceCode();
         #region Constructor
-        public AddEditReceptViewModel(AddEditReceptView addEditReceptViewOpen, bool isForEdit)
+        public AddEditReceptViewModel(Recept recept, AddEditReceptView addEditReceptViewOpen, bool isForEdit)
         {
             this.isForEdit = isForEdit;
+            this.recept = recept;
             addEditReceptView = addEditReceptViewOpen;
-            ReceptTypsList = new ObservableCollection<ReceptType>(service.GettAllTypes());            
+            ReceptTypsList = new ObservableCollection<ReceptType>(service.GettAllTypes());
+            SelectedReceptTyps = ReceptTypsList.FirstOrDefault(p => p.TypeID == recept.TypeId);
+            TemporaryComponentList= new ObservableCollection<Components>(service.GettAllComponentsByReceptId(recept.ReceptId));
         }
         #endregion
 

@@ -11,6 +11,7 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using Zadatak_1.Models;
 using Zadatak_1.ViewModel;
 
 namespace Zadatak_1.View
@@ -30,7 +31,7 @@ namespace Zadatak_1.View
 
         private void AddNewRecepie(object sender, RoutedEventArgs e)
         {
-            AddEditReceptView addEditReceptWindow = new AddEditReceptView(false);
+            AddEditReceptView addEditReceptWindow = new AddEditReceptView( new Recept(), false);
             addEditReceptWindow.Show();
             Close();
         }
@@ -43,9 +44,8 @@ namespace Zadatak_1.View
         }
 
         private void EditRecepie(object sender, RoutedEventArgs e)
-        {
-            AddEditReceptView addEditReceptWindow = new AddEditReceptView(true);
-            addEditReceptWindow.Show();
+        {           
+            rvm.EditRecept();
             Close();
         }
 

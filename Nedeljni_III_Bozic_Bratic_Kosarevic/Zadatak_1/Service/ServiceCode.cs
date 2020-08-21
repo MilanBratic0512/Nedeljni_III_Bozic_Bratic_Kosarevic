@@ -52,6 +52,50 @@ namespace Zadatak_1.Service
                 }
             }
         }
+
+        public List<Components> GettAllComponentsByReceptId(int receptId)
+        {
+            List<Components> componentsList = new List<Components>();
+            using (SqlConnection conn = new SqlConnection(ConfigurationManager.ConnectionStrings["con"].ToString()))
+            {
+                conn.Open();
+                try
+                {
+                    using (SqlCommand cmd = conn.CreateCommand())
+                    {
+                        cmd.CommandText = "Get_AllComponentsByReceptId";
+                        cmd.CommandType = CommandType.StoredProcedure;
+                        cmd.Parameters.AddWithValue("@ReceptID", receptId);
+                        SqlDataAdapter adapter = new SqlDataAdapter();
+                        adapter.SelectCommand = cmd;
+                        DataTable dt = new DataTable();
+                        adapter.Fill(dt);
+                        foreach (DataRow row in dt.Rows)
+                        {
+                            Components c = new Components
+                            {
+                                ComponentId = int.Parse(row[0].ToString()),
+                                ReceptId = int.Parse(row[1].ToString()),
+                                ComponentName = row[2].ToString(),
+                                ComponentAmount = int.Parse(row[3].ToString()),
+                            };
+                            componentsList.Add(c);
+                        }
+                        return componentsList;
+                    }
+                }
+                catch (Exception ex)
+                {
+                    System.Diagnostics.Debug.WriteLine("Exeption" + ex.Message.ToString());
+                    return null;
+                }
+                finally
+                {
+                    conn.Close();
+                }
+            }
+        }
+
         public int AddRecept(Recept recept)
         {
             using (SqlConnection conn = new SqlConnection(ConfigurationManager.ConnectionStrings["con"].ToString()))

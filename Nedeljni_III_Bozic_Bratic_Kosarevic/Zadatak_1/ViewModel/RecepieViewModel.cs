@@ -112,6 +112,29 @@ namespace Zadatak_1.ViewModel
             }
         }
 
+        public void EditRecept()
+        {
+            try
+            {
+                Recept editRecept = new Recept();
+                editRecept.ReceptId = recepie.ReceptId;
+                editRecept.UserId = recepie.UserId;
+                editRecept.TypeId = recepie.TypeId;
+                editRecept.ReceptName = recepie.ReceptName;
+                editRecept.PersonNumber = recepie.PersonNumber;
+                editRecept.Author = recepie.Author;
+                editRecept.ReceptText = recepie.ReceptText;
+
+                AddEditReceptView addEditReceptWindow = new AddEditReceptView(editRecept, true);
+                addEditReceptWindow.Show();
+
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.ToString());
+            }
+        }
+
         public event PropertyChangedEventHandler PropertyChanged;
 
         private void OnPropertyChanged(string propertyName)
