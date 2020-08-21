@@ -18,6 +18,14 @@ Height="288" Width="772" Margin="10,87,10,44" HorizontalAlignment="Center" Selec
                 <DataGridTextColumn Header="Persons" Binding="{Binding PersonNumber}" IsReadOnly="True" />
                 <DataGridTextColumn Header="Components" Binding="{Binding ComponentsNumber}" IsReadOnly="True" />
                 <DataGridTextColumn Header="Creation Date" Binding="{Binding CreationDate, StringFormat=dd/MM/yyyy}" IsReadOnly="True" />
+                <DataGridTemplateColumn Header="Recepie Details">
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <Button Click="RecepieDetails" Content="About"/>
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
+                
                 <DataGridTemplateColumn Header="Edit">
                     <DataGridTemplateColumn.CellTemplate>
                         <DataTemplate>
