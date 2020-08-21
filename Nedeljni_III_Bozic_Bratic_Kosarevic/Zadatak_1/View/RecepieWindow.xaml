@@ -18,6 +18,13 @@ Height="288" Width="772" Margin="10,87,10,44" HorizontalAlignment="Center" Selec
                 <DataGridTextColumn Header="Persons" Binding="{Binding PersonNumber}" IsReadOnly="True" />
                 <DataGridTextColumn Header="Components" Binding="{Binding ComponentsNumber}" IsReadOnly="True" />
                 <DataGridTextColumn Header="Creation Date" Binding="{Binding CreationDate, StringFormat=dd/MM/yyyy}" IsReadOnly="True" />
+                <DataGridTemplateColumn Header="Recepie Details">
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <Button Click="RecepieDetails" Content="About"/>
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
                 <DataGridTemplateColumn Header="Edit">
                     <DataGridTemplateColumn.CellTemplate>
                         <DataTemplate>
@@ -35,9 +42,8 @@ Height="288" Width="772" Margin="10,87,10,44" HorizontalAlignment="Center" Selec
             </DataGrid.Columns>
         </DataGrid>
         <Button Content="Logout" HorizontalAlignment="Left" Margin="10,389,0,0" VerticalAlignment="Top" Width="75" Click="Logout"/>
-
         <Button Content="Shopping cart" HorizontalAlignment="Left" Margin="683,389,0,0" VerticalAlignment="Top" Width="82" Click="ShoppingCart"/>
-
-
+        <TextBox HorizontalAlignment="Left" Height="23" Margin="372,59,0,0" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="120"/>
+        <TextBox HorizontalAlignment="Left" Height="23" Margin="555,59,0,0" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="120"/>
     </Grid>
 </Window>

@@ -40,6 +40,36 @@ namespace Zadatak_1.ViewModel
             }
         }
 
+        private string recepieName;
+
+        public string RecepieName
+        {
+            get { return recepieName; }
+            set
+            {
+                if (recepieName != value)
+                {
+                    recepieName = value;
+                    OnPropertyChanged("RecepieName");
+                }
+            }
+        }
+
+        private string typeName;
+
+        public string TypeName
+        {
+            get { return typeName; }
+            set
+            {
+                if (typeName != value)
+                {
+                    typeName = value;
+                    OnPropertyChanged("TypeName");
+                }
+            }
+        }
+
         public void FillList()
         {
             using (SqlConnection conn = new SqlConnection(ConfigurationManager.ConnectionStrings["con"].ToString()))
@@ -102,7 +132,7 @@ namespace Zadatak_1.ViewModel
         {
             using (var conn = new SqlConnection(ConfigurationManager.ConnectionStrings["con"].ToString()))
             {
-                var cmd = new SqlCommand(@"Delete from tblRecept where ReceptID=@RecepieID;", conn);
+                var cmd = new SqlCommand(@"Delete from tblComponents where ReceptID=@RecepieID; Delete from tblRecept where ReceptID=@RecepieID;", conn);
                 cmd.Parameters.AddWithValue("@RecepieID", recepie.ReceptId);
                 conn.Open();
                 cmd.ExecuteNonQuery();

@@ -68,19 +68,19 @@ insert into tblRecept values(2, 1, 'Recepie 1', 5, 'Author 1', 'Recepie Text 1',
 insert into tblRecept values(2, 1, 'Recepie 2', 5, 'Author 1', 'Recepie Text 1', '1-1-2019');
 insert into tblRecept values(2, 1, 'Recepie 3', 5, 'Author 1', 'Recepie Text 1', '1-1-2018');
 
-insert into tblComponents values (1, 'mesto', 3);
+insert into tblComponents values (1, 'meso', 3);
 insert into tblComponents values (1, 'mleko', 3);
 insert into tblComponents values (1, 'jaja', 3);
-insert into tblComponents values (2, 'mesto', 3);
+insert into tblComponents values (2, 'meso', 3);
 insert into tblComponents values (1, 'mleko', 3);
 insert into tblComponents values (3, 'jaja', 3);
-insert into tblComponents values (3, 'mesto', 3);
+insert into tblComponents values (3, 'meso', 3);
 insert into tblComponents values (3, 'mleko', 3);
 insert into tblComponents values (2, 'jaja', 3);
 
 select * from tblRecept
 select * from tblUser
-exec Get_AllReceptsComponentsNumber @ReceptID = 1;
+select * from tblComponents
 
 CREATE PROCEDURE Get_AllRecepts 
 AS

@@ -60,5 +60,10 @@ namespace Zadatak_1.View
             shoppingCartView.Show();
         }
 
+        private void RecepieDetails(object sender, RoutedEventArgs e)
+        {
+
+        }
+
     }
 }
