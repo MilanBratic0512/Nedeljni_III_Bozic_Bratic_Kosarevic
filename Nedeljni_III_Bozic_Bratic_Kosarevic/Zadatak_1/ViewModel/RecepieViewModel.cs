@@ -102,7 +102,7 @@ namespace Zadatak_1.ViewModel
         {
             using (var conn = new SqlConnection(ConfigurationManager.ConnectionStrings["con"].ToString()))
             {
-                var cmd = new SqlCommand(@"Delete from tblRecept where ReceptID=@RecepieID;", conn);
+                var cmd = new SqlCommand(@"Delete from tblComponents where ReceptID=@RecepieID; Delete from tblRecept where ReceptID=@RecepieID;", conn);
                 cmd.Parameters.AddWithValue("@RecepieID", recepie.ReceptId);
                 conn.Open();
                 cmd.ExecuteNonQuery();
