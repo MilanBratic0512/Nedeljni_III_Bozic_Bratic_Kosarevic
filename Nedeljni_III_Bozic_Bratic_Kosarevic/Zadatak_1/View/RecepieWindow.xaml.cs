@@ -45,8 +45,8 @@ namespace Zadatak_1.View
 
         private void EditRecepie(object sender, RoutedEventArgs e)
         {           
-            rvm.EditRecept();
-            Close();
+            //rvm.EditRecept();
+            //Close();
         }
 
         private void DeleteRecepie(object sender, RoutedEventArgs e)
@@ -62,7 +62,8 @@ namespace Zadatak_1.View
 
         private void RecepieDetails(object sender, RoutedEventArgs e)
         {
-
+            rvm.DetilsRecept();
+            Close();
         }
 
     }

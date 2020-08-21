@@ -153,7 +153,7 @@ namespace Zadatak_1.ViewModel
         }
         #endregion
 
-        #region        
+        #region Commands       
 
         public void AddAddComponentToList()
         {
@@ -225,23 +225,38 @@ namespace Zadatak_1.ViewModel
                 }
                 else
                 {
-                    // int receptId = service.UpdateRecept(Recept);
-                    foreach (Components component in TemporaryComponentList)
+                    if (service.UpdateRecept(Recept))
                     {
-                        if(component.ReceptId==0)
+                        foreach (Components component in TemporaryComponentList)
                         {
-                            //component.ReceptId = receptId;
-                        }                        
-                    }
+                            if (component.ReceptId == 0)
+                            {
+                                component.ReceptId = recept.ReceptId;
+                            }
+                        }
 
-                    foreach (Components component in TemporaryComponentList)
-                    {
-                        service.AddComponent(component);
+                        if(components.ComponentId==0)
+                        {
+                            foreach (Components component in TemporaryComponentList)
+                            {
+                                service.AddComponent(component);
+                            }
+                        }
+                        else
+                        {
+                            foreach (Components component in TemporaryComponentList)
+                            {
+                                service.UpdateComponent(component);
+                            }
+                        }
+                        
+
+                        
+                        MessageBox.Show("You have successfully changed recept");
+                        RecepieWindow recepieWindowWindow = new RecepieWindow();
+                        recepieWindowWindow.Show();
+                        addEditReceptView.Close();
                     }
-                    MessageBox.Show("You have successfully changed recept");
-                    RecepieWindow recepieWindowWindow = new RecepieWindow();
-                    recepieWindowWindow.Show();
-                    addEditReceptView.Close();
                 }
             }
             catch (Exception ex)
