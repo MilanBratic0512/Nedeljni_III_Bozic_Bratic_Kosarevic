@@ -92,6 +92,9 @@
     <Compile Include="View\ReceptDetailsView.xaml.cs">
       <DependentUpon>ReceptDetailsView.xaml</DependentUpon>
     </Compile>
+    <Compile Include="View\SearchByComponentsWindow.xaml.cs">
+      <DependentUpon>SearchByComponentsWindow.xaml</DependentUpon>
+    </Compile>
     <Compile Include="View\ShoppingCartView.xaml.cs">
       <DependentUpon>ShoppingCartView.xaml</DependentUpon>
     </Compile>
@@ -139,6 +142,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="View\ReceptDetailsView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="View\SearchByComponentsWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -148,6 +155,7 @@
     </Page>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="StoreProcedures\Delete_Component.sql" />
     <Content Include="StoreProcedures\Get_AllComponents.sql" />
     <Content Include="StoreProcedures\Update_Component.sql" />
     <Content Include="StoreProcedures\Update_Recept.sql" />
