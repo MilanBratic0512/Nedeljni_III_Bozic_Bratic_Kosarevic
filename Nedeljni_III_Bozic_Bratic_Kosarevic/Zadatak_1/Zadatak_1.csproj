@@ -75,6 +75,7 @@
     <Compile Include="Models\ReceptType.cs" />
     <Compile Include="Models\User.cs" />
     <Compile Include="Service\ServiceCode.cs" />
+    <Compile Include="Validations\SearchValidation.cs" />
     <Compile Include="Validations\UserValidation.cs" />
     <Compile Include="ViewModel\AddEditReceptViewModel.cs" />
     <Compile Include="ViewModel\ReceptDetailsViewModela.cs" />
