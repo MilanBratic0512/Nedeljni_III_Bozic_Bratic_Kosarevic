@@ -66,5 +66,69 @@ namespace Zadatak_1.View
             Close();
         }
 
+        private void Title_LostFocus(object sender, RoutedEventArgs e)
+        {
+            if (Type.Text == "" && Title.Text != "")
+            {
+                Type.IsEnabled = false;
+            }
+            else
+            {
+                Type.IsEnabled = true;
+            }
+        }
+
+        private void Type_LostFocus(object sender, RoutedEventArgs e)
+        {
+            if (Title.Text == "" && Type.Text != "")
+            {
+                Title.IsEnabled = false;
+            }
+            else
+            {
+                Title.IsEnabled = true;
+            }
+        }
+
+        private void ComponentsSearch(object sender, RoutedEventArgs e)
+        {
+            Title.Text = "";
+            Type.Text = "";
+            Title.IsEnabled = false;
+            Type.IsEnabled = false;
+            Components.IsEnabled = false;
+            OkBtn.IsEnabled = false;
+            ResetBtn.IsEnabled = false;
+            SearchByComponentsWindow window = new SearchByComponentsWindow(rvm);
+            window.Show();
+        }
+
+        private void BeginSearch(object sender, RoutedEventArgs e)
+        {
+            Title.IsEnabled = false;
+            Type.IsEnabled = false;
+            Components.IsEnabled = false;
+
+            if (Title.Text != "")
+            {
+                rvm.SearchByRecepieTitle();
+            }
+            else
+            {
+                rvm.SearchByRecepieType();
+            }
+        }
+
+        private void ResetSearch(object sender, RoutedEventArgs e)
+        {
+            Title.Text = "";
+            Type.Text = "";
+            Title.IsEnabled = true;
+            Type.IsEnabled = true;
+            Components.IsEnabled = true;
+            OkBtn.IsEnabled = true;
+            rvm.Recepies.Clear();
+            rvm.FillList();
+        }
     }
 }

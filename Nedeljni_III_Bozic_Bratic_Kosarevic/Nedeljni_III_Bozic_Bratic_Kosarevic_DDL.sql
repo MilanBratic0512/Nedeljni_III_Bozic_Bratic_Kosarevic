@@ -62,21 +62,21 @@ Add foreign key (TypeID) references tblType(TypeID);
 Alter Table tblComponents
 Add foreign key (ReceptID) references tblRecept(ReceptID);
 
-insert into tblUser values('Aca', 'aca', 'A?????s?e8?B0F?]???\f?l%H?%');
---Password acasaca
-insert into tblRecept values(2, 1, 'Recepie 1', 5, 'Author 1', 'Recepie Text 1', '1-1-2020');
-insert into tblRecept values(2, 1, 'Recepie 2', 5, 'Author 1', 'Recepie Text 1', '1-1-2019');
-insert into tblRecept values(2, 1, 'Recepie 3', 5, 'Author 1', 'Recepie Text 1', '1-1-2018');
+insert into tblUser values('Aca', 'aca', 'A?????s?e8?B0F?]???\f?l%H?%'); --Password acasaca
 
-insert into tblComponents values (1, 'meso', 3);
+insert into tblRecept values(2, 1, 'Recepie 1', 3, 'Author 1', 'Recepie Text 1', '1-1-2020');
+insert into tblRecept values(2, 2, 'Recepie 2', 4, 'Author 1', 'Recepie Text 1', '1-1-2019');
+insert into tblRecept values(2, 3, 'Recepie 3', 5, 'Author 1', 'Recepie Text 1', '1-1-2018');
+
+insert into tblComponents values (1, 'pavlaka', 3);
 insert into tblComponents values (1, 'mleko', 3);
 insert into tblComponents values (1, 'jaja', 3);
-insert into tblComponents values (2, 'meso', 3);
-insert into tblComponents values (1, 'mleko', 3);
-insert into tblComponents values (3, 'jaja', 3);
-insert into tblComponents values (3, 'meso', 3);
-insert into tblComponents values (3, 'mleko', 3);
-insert into tblComponents values (2, 'jaja', 3);
+insert into tblComponents values (2, 'pavlaka', 3);
+insert into tblComponents values (2, 'djumbir', 3);
+insert into tblComponents values (2, 'cevapi', 3);
+insert into tblComponents values (3, 'lignja', 3);
+insert into tblComponents values (3, 'skusa', 3);
+insert into tblComponents values (3, 'becka', 3);
 
 select * from tblRecept
 select * from tblUser
@@ -94,3 +94,28 @@ SELECT COUNT(*) NumberOfComponents FROM tblComponents c
 left join tblRecept r on r.ReceptID=c.ReceptID
 where c.ReceptID = @ReceptID
 GO
+
+ CREATE PROCEDURE  Get_AllReceptsByName
+  @ReceptName nvarchar(50)
+  as 
+	select * from tblRecept
+	left join tblType on tblRecept.TypeID=tblType.TypeID
+    where  ReceptName LIKE '%'+ @ReceptName +'%'
+go
+
+ CREATE PROCEDURE  Get_AllReceptsByType
+  @TypeName nvarchar(50)
+  as 
+	select * from tblRecept
+	left join tblType on tblRecept.TypeID=tblType.TypeID
+    where  TypeName LIKE '%'+ @TypeName +'%'
+go
+
+CREATE PROCEDURE Get_AllReceptsByComponents
+ @searchComponent nvarchar(MAX)
+ as
+	select * from tblRecept r
+	left join tblType on r.TypeID=tblType.TypeID 
+	left join tblComponents on r.ReceptID=tblComponents.ReceptID
+    WHERE ComponentName LIKE '%'+ @searchComponent +'%'
+go
