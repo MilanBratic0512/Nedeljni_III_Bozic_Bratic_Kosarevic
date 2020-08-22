@@ -215,9 +215,36 @@ namespace Zadatak_1.Service
                         cmd.CommandText = "Update_Component";
                         cmd.CommandType = CommandType.StoredProcedure;
                         cmd.Parameters.AddWithValue("@ComponentID", component.ComponentId);
-                        cmd.Parameters.AddWithValue("@ReceptID", component.ReceptId);                        
+                        cmd.Parameters.AddWithValue("@ReceptID", component.ReceptId);
                         cmd.Parameters.AddWithValue("@ComponentName", component.ComponentName);
-                        cmd.Parameters.AddWithValue("@ComponentAmount", component.ComponentAmount);                       
+                        cmd.Parameters.AddWithValue("@ComponentAmount", component.ComponentAmount);
+                        cmd.ExecuteNonQuery();
+                        return true;
+                    }
+                }
+                catch (Exception ex)
+                {
+                    System.Diagnostics.Debug.WriteLine("Exeption" + ex.Message.ToString());
+                    return false;
+                }
+                finally
+                {
+                    conn.Close();
+                }
+            }
+        }
+        public bool DeleteComponent(int componentId)
+        {
+            using (SqlConnection conn = new SqlConnection(ConfigurationManager.ConnectionStrings["con"].ToString()))
+            {
+                conn.Open();
+                try
+                {
+                    using (SqlCommand cmd = conn.CreateCommand())
+                    {
+                        cmd.CommandText = "Delete_Component";
+                        cmd.CommandType = CommandType.StoredProcedure;
+                        cmd.Parameters.AddWithValue("@ComponentID", componentId);
                         cmd.ExecuteNonQuery();
                         return true;
                     }

@@ -174,7 +174,15 @@ namespace Zadatak_1.ViewModel
         {
             try
             {
-                temporaryComponentList.Remove(selectedComponents);
+                if(selectedComponents.ComponentId==0)
+                {
+                    temporaryComponentList.Remove(selectedComponents);
+                }
+                else
+                {
+                    service.DeleteComponent(selectedComponents.ComponentId);
+                    temporaryComponentList.Remove(selectedComponents);
+                }                
             }
             catch (Exception ex)
             {
@@ -235,22 +243,17 @@ namespace Zadatak_1.ViewModel
                             }
                         }
 
-                        if(components.ComponentId==0)
+                        foreach (Components component in TemporaryComponentList)
                         {
-                            foreach (Components component in TemporaryComponentList)
-                            {
+                            if (components.ComponentId==0)
+                            {                           
                                 service.AddComponent(component);
                             }
-                        }
-                        else
-                        {
-                            foreach (Components component in TemporaryComponentList)
+                            else
                             {
                                 service.UpdateComponent(component);
                             }
-                        }
-                        
-
+                        }              
                         
                         MessageBox.Show("You have successfully changed recept");
                         RecepieWindow recepieWindowWindow = new RecepieWindow();
