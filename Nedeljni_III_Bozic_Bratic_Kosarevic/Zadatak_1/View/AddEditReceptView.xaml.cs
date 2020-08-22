@@ -25,10 +25,10 @@ namespace Zadatak_1.View
     public partial class AddEditReceptView : Window
     {
         AddEditReceptViewModel addEditModel;
-        public AddEditReceptView(Recept recept, bool isForEdit)
+        public AddEditReceptView(Recept recept,bool isForEdit)
         {
             InitializeComponent();
-            addEditModel = new AddEditReceptViewModel(recept, this, isForEdit);
+            addEditModel = new AddEditReceptViewModel(recept,this, isForEdit);
             this.DataContext = addEditModel;
         }
 

@@ -20,7 +20,7 @@ namespace Zadatak_1.ViewModel
         AddEditReceptView addEditReceptView;
         ServiceCode service = new ServiceCode();
         #region Constructor
-        public AddEditReceptViewModel(Recept recept, AddEditReceptView addEditReceptViewOpen, bool isForEdit)
+        public AddEditReceptViewModel(Recept recept,AddEditReceptView addEditReceptViewOpen, bool isForEdit)
         {
             this.isForEdit = isForEdit;
             this.recept = recept;
@@ -245,7 +245,7 @@ namespace Zadatak_1.ViewModel
 
                         foreach (Components component in TemporaryComponentList)
                         {
-                            if (components.ComponentId==0)
+                            if (component.ComponentId==0)
                             {                           
                                 service.AddComponent(component);
                             }

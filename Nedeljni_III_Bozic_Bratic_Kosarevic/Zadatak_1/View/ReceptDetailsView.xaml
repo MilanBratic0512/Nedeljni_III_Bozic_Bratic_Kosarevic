@@ -10,6 +10,7 @@
     <Window.Resources>
         <ResourceDictionary>
             <converters:EditBtnToVisibilitiConverter x:Key="EditBtnToVisibilitiConverter" />
+            <converters:UserToEnableButtonConverter x:Key="UserToEnableButtonConverter" />
             <converters:DeleteBtnToVisibilitiConverter x:Key="DeleteBtnToVisibilitiConverter" />
         </ResourceDictionary>
     </Window.Resources>
@@ -82,17 +83,23 @@
                 <DataGridTextColumn Header="kom/g" Binding="{Binding ComponentAmount}" Width="50"/>
             </DataGrid.Columns>
         </DataGrid>
-        <Button Grid.Column="5" Grid.Row="19" Name="btnEdit" Content="Edit" IsEnabled="true" Height="20" 
-                Visibility="{Binding Recept.UserId, Converter={StaticResource EditBtnToVisibilitiConverter}}"
+        <Button Grid.Column="5" Grid.Row="19" Name="btnEdit" Content="Edit"  Height="20" IsEnabled="True"                
                 Width="70" HorizontalAlignment="Left" Command="{Binding Save, UpdateSourceTrigger=PropertyChanged}"
                 Click="btnEdit_Click"
-                />
+                >
+            <Button.Visibility>
+                <MultiBinding Converter="{StaticResource UserToEnableButtonConverter}">
+                    <Binding Path="User.Username"/>
+                    <Binding Path="Recept.UserId"/>
+                </MultiBinding>
+            </Button.Visibility>
+        </Button>
         <Button Grid.Column="7" Grid.Row="19" Name="btnDelete" Content="Delete" IsEnabled="True" Height="20" 
                 Visibility="{Binding User.Username, Converter={StaticResource DeleteBtnToVisibilitiConverter}}"
                 Width="70" HorizontalAlignment="Left"
                 Click="btnDelete_Click"
                 />
-        <Button Grid.Column="9" Grid.Row="19" Name="btnQuit" Content="Quit" IsEnabled="True" Height="20" 
+        <Button Grid.Column="9" Grid.Row="19" Name="btnQuit" Content="Back" IsEnabled="True" Height="20" 
                 Width="70" HorizontalAlignment="Left" Click="btnQuit_Click"/>
     </Grid>
 </Window>

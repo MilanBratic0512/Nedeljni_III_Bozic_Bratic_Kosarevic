@@ -31,7 +31,7 @@ namespace Zadatak_1.View
 
         private void AddNewRecepie(object sender, RoutedEventArgs e)
         {
-            AddEditReceptView addEditReceptWindow = new AddEditReceptView( new Recept(), false);
+            AddEditReceptView addEditReceptWindow = new AddEditReceptView(new Recept(), false);
             addEditReceptWindow.Show();
             Close();
         }
@@ -44,8 +44,9 @@ namespace Zadatak_1.View
         }
 
         private void EditRecepie(object sender, RoutedEventArgs e)
-        {           
-            //rvm.EditRecept();
+        {
+            //AddEditReceptView addEditReceptWindow = new AddEditReceptView(true);
+            //addEditReceptWindow.Show();
             //Close();
         }
 
@@ -68,7 +69,7 @@ namespace Zadatak_1.View
 
         private void Title_LostFocus(object sender, RoutedEventArgs e)
         {
-            if (Type.Text == "" && Title.Text != "")
+            if (Type.Text == "" && TitleR.Text != "")
             {
                 Type.IsEnabled = false;
             }
@@ -80,21 +81,21 @@ namespace Zadatak_1.View
 
         private void Type_LostFocus(object sender, RoutedEventArgs e)
         {
-            if (Title.Text == "" && Type.Text != "")
+            if (TitleR.Text == "" && Type.Text != "")
             {
-                Title.IsEnabled = false;
+                TitleR.IsEnabled = false;
             }
             else
             {
-                Title.IsEnabled = true;
+                TitleR.IsEnabled = true;
             }
         }
 
         private void ComponentsSearch(object sender, RoutedEventArgs e)
         {
-            Title.Text = "";
+            TitleR.Text = "";
             Type.Text = "";
-            Title.IsEnabled = false;
+            TitleR.IsEnabled = false;
             Type.IsEnabled = false;
             Components.IsEnabled = false;
             OkBtn.IsEnabled = false;
@@ -105,11 +106,11 @@ namespace Zadatak_1.View
 
         private void BeginSearch(object sender, RoutedEventArgs e)
         {
-            Title.IsEnabled = false;
+            TitleR.IsEnabled = false;
             Type.IsEnabled = false;
             Components.IsEnabled = false;
 
-            if (Title.Text != "")
+            if (TitleR.Text != "")
             {
                 rvm.SearchByRecepieTitle();
             }
@@ -121,9 +122,9 @@ namespace Zadatak_1.View
 
         private void ResetSearch(object sender, RoutedEventArgs e)
         {
-            Title.Text = "";
+            TitleR.Text = "";
             Type.Text = "";
-            Title.IsEnabled = true;
+            TitleR.IsEnabled = true;
             Type.IsEnabled = true;
             Components.IsEnabled = true;
             OkBtn.IsEnabled = true;
