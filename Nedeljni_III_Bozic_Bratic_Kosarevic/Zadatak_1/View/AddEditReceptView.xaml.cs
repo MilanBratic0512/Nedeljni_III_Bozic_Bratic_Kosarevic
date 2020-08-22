@@ -14,7 +14,6 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 using Zadatak_1.Model;
-using Zadatak_1.Models;
 using Zadatak_1.ViewModel;
 
 namespace Zadatak_1.View
@@ -25,10 +24,10 @@ namespace Zadatak_1.View
     public partial class AddEditReceptView : Window
     {
         AddEditReceptViewModel addEditModel;
-        public AddEditReceptView(Recept recept, bool isForEdit)
+        public AddEditReceptView(bool isForEdit)
         {
             InitializeComponent();
-            addEditModel = new AddEditReceptViewModel(recept, this, isForEdit);
+            addEditModel = new AddEditReceptViewModel(this, isForEdit);
             this.DataContext = addEditModel;
         }
 
@@ -96,7 +95,7 @@ namespace Zadatak_1.View
                 lblValidationReceptName.Content = "The name must contain \nat least 5 letters!";
             }
 
-            string patternName = @"^([a-zA-Z0-9 ]{5,100})$";
+            string patternName = @"^([a-zA-Z ]{5,100})$";
             Match match = Regex.Match(txtReceptName.Text, patternName, RegexOptions.IgnoreCase);
 
             if (!match.Success)
@@ -171,7 +170,7 @@ namespace Zadatak_1.View
                 lblValidationReceptText.Content = "The text must contain \nat least 10 letters!";
             }
 
-            string patternName = @"^([a-zA-Z0-9 ]{10,400})$";
+            string patternName = @"^([a-zA-Z ]{10,400})$";
             Match match = Regex.Match(txtReceptText.Text, patternName, RegexOptions.IgnoreCase);
 
             if (!match.Success)

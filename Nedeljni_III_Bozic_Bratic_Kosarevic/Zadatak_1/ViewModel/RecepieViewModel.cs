@@ -15,7 +15,7 @@ using Zadatak_1.View;
 
 namespace Zadatak_1.ViewModel
 {
-    class RecepieViewModel : INotifyPropertyChanged
+    public class RecepieViewModel : INotifyPropertyChanged
     {
         public ObservableCollection<Recept> Recepies { get; set; }
 
@@ -23,6 +23,9 @@ namespace Zadatak_1.ViewModel
         {
             FillList();
             Recepie = new Recept();
+            RecepieName = "";
+            TypeName = "";
+            Components = "";
         }
 
         private Recept recepie;
@@ -66,6 +69,21 @@ namespace Zadatak_1.ViewModel
                 {
                     typeName = value;
                     OnPropertyChanged("TypeName");
+                }
+            }
+        }
+
+        private string components;
+
+        public string Components
+        {
+            get { return components; }
+            set
+            {
+                if (components != value)
+                {
+                    components = value;
+                    OnPropertyChanged("Components");
                 }
             }
         }
@@ -142,48 +160,194 @@ namespace Zadatak_1.ViewModel
             }
         }
 
-        public void EditRecept()
+        public void SearchByRecepieTitle()
         {
-            try
+            using (SqlConnection conn = new SqlConnection(ConfigurationManager.ConnectionStrings["con"].ToString()))
             {
-                Recept editRecept = new Recept();
-                editRecept.ReceptId = recepie.ReceptId;
-                editRecept.UserId = recepie.UserId;
-                editRecept.TypeId = recepie.TypeId;
-                editRecept.ReceptName = recepie.ReceptName;
-                editRecept.PersonNumber = recepie.PersonNumber;
-                editRecept.Author = recepie.Author;
-                editRecept.ReceptText = recepie.ReceptText;
+                SqlCommand query = new SqlCommand(@"exec Get_AllReceptsByName @RecepieName", conn);
+                query.Parameters.AddWithValue("@RecepieName", recepieName);
+                conn.Open();
+                SqlDataAdapter sqlDataAdapter = new SqlDataAdapter(query);
+                DataTable dataTable = new DataTable();
+                sqlDataAdapter.Fill(dataTable);
 
-                AddEditReceptView addEditReceptWindow = new AddEditReceptView(editRecept, true);
-                addEditReceptWindow.Show();
+                Recepies.Clear();
 
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show(ex.ToString());
+                foreach (DataRow row in dataTable.Rows)
+                {
+                    Recept r = new Recept
+                    {
+                        ReceptId = int.Parse(row[0].ToString()),
+                        UserId = int.Parse(row[1].ToString()),
+                        TypeId = int.Parse(row[2].ToString()),
+                        ReceptName = row[3].ToString(),
+                        PersonNumber = int.Parse(row[4].ToString()),
+                        Author = row[5].ToString(),
+                        ReceptText = row[6].ToString(),
+                        CreationDate = DateTime.Parse(row[7].ToString()),
+                        ReceptType = row[9].ToString(),
+                    };
+
+                    if (LoginWindow.CurrentUser.UserId == r.UserId)
+                    {
+                        r.CanEdit = true;
+                    }
+                    if (LoginWindow.CurrentUser.Username == "Admin")
+                    {
+                        r.CanEdit = true;
+                        r.CanDelete = true;
+                    }
+
+                    using (SqlConnection conn1 = new SqlConnection(ConfigurationManager.ConnectionStrings["con"].ToString()))
+                    {
+                        SqlCommand query1 = new SqlCommand(@"exec Get_AllReceptsComponentsNumber @ReceptID = @Id;", conn1);
+                        query1.Parameters.AddWithValue("@Id", r.ReceptId);
+                        conn1.Open();
+                        SqlDataAdapter sqlDataAdapter1 = new SqlDataAdapter(query1);
+                        DataTable dataTable1 = new DataTable();
+                        sqlDataAdapter1.Fill(dataTable1);
+
+                        foreach (DataRow row1 in dataTable1.Rows)
+                        {
+                            r.ComponentsNumber = int.Parse(row1[0].ToString());
+                        }
+                    }
+
+                    Recepies.Add(r);
+                }
             }
         }
 
-        public void DetilsRecept()
+        public void SearchByRecepieType()
         {
-            try
+            using (SqlConnection conn = new SqlConnection(ConfigurationManager.ConnectionStrings["con"].ToString()))
             {
-                Recept detailsRecept = new Recept();
-                detailsRecept.ReceptId = recepie.ReceptId;
-                detailsRecept.UserId = recepie.UserId;
-                detailsRecept.TypeId = recepie.TypeId;
-                detailsRecept.ReceptName = recepie.ReceptName;
-                detailsRecept.PersonNumber = recepie.PersonNumber;
-                detailsRecept.Author = recepie.Author;
-                detailsRecept.ReceptText = recepie.ReceptText;
+                SqlCommand query = new SqlCommand(@"exec Get_AllReceptsByType @TypeName", conn);
+                query.Parameters.AddWithValue("@TypeName", typeName);
+                conn.Open();
+                SqlDataAdapter sqlDataAdapter = new SqlDataAdapter(query);
+                DataTable dataTable = new DataTable();
+                sqlDataAdapter.Fill(dataTable);
 
-                ReceptDetailsView receptDetailsView = new ReceptDetailsView(detailsRecept);
-                receptDetailsView.Show();
+                Recepies.Clear();
+
+                foreach (DataRow row in dataTable.Rows)
+                {
+                    Recept r = new Recept
+                    {
+                        ReceptId = int.Parse(row[0].ToString()),
+                        UserId = int.Parse(row[1].ToString()),
+                        TypeId = int.Parse(row[2].ToString()),
+                        ReceptName = row[3].ToString(),
+                        PersonNumber = int.Parse(row[4].ToString()),
+                        Author = row[5].ToString(),
+                        ReceptText = row[6].ToString(),
+                        CreationDate = DateTime.Parse(row[7].ToString()),
+                        ReceptType = row[9].ToString(),
+                    };
+
+                    if (LoginWindow.CurrentUser.UserId == r.UserId)
+                    {
+                        r.CanEdit = true;
+                    }
+                    if (LoginWindow.CurrentUser.Username == "Admin")
+                    {
+                        r.CanEdit = true;
+                        r.CanDelete = true;
+                    }
+
+                    using (SqlConnection conn1 = new SqlConnection(ConfigurationManager.ConnectionStrings["con"].ToString()))
+                    {
+                        SqlCommand query1 = new SqlCommand(@"exec Get_AllReceptsComponentsNumber @ReceptID = @Id;", conn1);
+                        query1.Parameters.AddWithValue("@Id", r.ReceptId);
+                        conn1.Open();
+                        SqlDataAdapter sqlDataAdapter1 = new SqlDataAdapter(query1);
+                        DataTable dataTable1 = new DataTable();
+                        sqlDataAdapter1.Fill(dataTable1);
+
+                        foreach (DataRow row1 in dataTable1.Rows)
+                        {
+                            r.ComponentsNumber = int.Parse(row1[0].ToString());
+                        }
+                    }
+
+                    Recepies.Add(r);
+                }
             }
-            catch (Exception ex)
+        }
+
+        public void SearchByRecepieComponent()
+        {
+            string[] words = components.Split(' ');
+
+            Recepies.Clear();
+
+            foreach (string s in words)
             {
-                MessageBox.Show(ex.ToString());
+                if (s == "") continue;
+
+                using (SqlConnection conn = new SqlConnection(ConfigurationManager.ConnectionStrings["con"].ToString()))
+                {
+                    SqlCommand query = new SqlCommand(@"exec Get_AllReceptsByComponents @Components", conn);
+                    query.Parameters.AddWithValue("@Components", s);
+                    conn.Open();
+                    SqlDataAdapter sqlDataAdapter = new SqlDataAdapter(query);
+                    DataTable dataTable = new DataTable();
+                    sqlDataAdapter.Fill(dataTable);
+
+                    foreach (DataRow row in dataTable.Rows)
+                    {
+                        Recept r = new Recept
+                        {
+                            ReceptId = int.Parse(row[0].ToString()),
+                            UserId = int.Parse(row[1].ToString()),
+                            TypeId = int.Parse(row[2].ToString()),
+                            ReceptName = row[3].ToString(),
+                            PersonNumber = int.Parse(row[4].ToString()),
+                            Author = row[5].ToString(),
+                            ReceptText = row[6].ToString(),
+                            CreationDate = DateTime.Parse(row[7].ToString()),
+                            ReceptType = row[9].ToString(),
+                        };
+
+                        if (LoginWindow.CurrentUser.UserId == r.UserId)
+                        {
+                            r.CanEdit = true;
+                        }
+                        if (LoginWindow.CurrentUser.Username == "Admin")
+                        {
+                            r.CanEdit = true;
+                            r.CanDelete = true;
+                        }
+
+                        using (SqlConnection conn1 = new SqlConnection(ConfigurationManager.ConnectionStrings["con"].ToString()))
+                        {
+                            SqlCommand query1 = new SqlCommand(@"exec Get_AllReceptsComponentsNumber @ReceptID = @Id;", conn1);
+                            query1.Parameters.AddWithValue("@Id", r.ReceptId);
+                            conn1.Open();
+                            SqlDataAdapter sqlDataAdapter1 = new SqlDataAdapter(query1);
+                            DataTable dataTable1 = new DataTable();
+                            sqlDataAdapter1.Fill(dataTable1);
+
+                            foreach (DataRow row1 in dataTable1.Rows)
+                            {
+                                r.ComponentsNumber = int.Parse(row1[0].ToString());
+                            }
+                        }
+
+                        List<int> ids = new List<int>();
+
+                        foreach (Recept i in Recepies)
+                        {
+                            ids.Add(i.ReceptId);
+                        }
+
+                        if (!ids.Contains(r.ReceptId))
+                        {
+                            Recepies.Add(r);
+                        }
+                    }
+                }
             }
         }
 

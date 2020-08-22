@@ -11,7 +11,6 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
-using Zadatak_1.Models;
 using Zadatak_1.ViewModel;
 
 namespace Zadatak_1.View
@@ -31,7 +30,7 @@ namespace Zadatak_1.View
 
         private void AddNewRecepie(object sender, RoutedEventArgs e)
         {
-            AddEditReceptView addEditReceptWindow = new AddEditReceptView( new Recept(), false);
+            AddEditReceptView addEditReceptWindow = new AddEditReceptView(false);
             addEditReceptWindow.Show();
             Close();
         }
@@ -44,9 +43,10 @@ namespace Zadatak_1.View
         }
 
         private void EditRecepie(object sender, RoutedEventArgs e)
-        {           
-            //rvm.EditRecept();
-            //Close();
+        {
+            AddEditReceptView addEditReceptWindow = new AddEditReceptView(true);
+            addEditReceptWindow.Show();
+            Close();
         }
 
         private void DeleteRecepie(object sender, RoutedEventArgs e)
@@ -62,8 +62,7 @@ namespace Zadatak_1.View
 
         private void RecepieDetails(object sender, RoutedEventArgs e)
         {
-            rvm.DetilsRecept();
-            Close();
+
         }
 
         private void Title_LostFocus(object sender, RoutedEventArgs e)
