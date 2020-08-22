@@ -47,8 +47,7 @@ namespace Zadatak_1.View
             receptDetails.DeleteRecepie();
             RecepieWindow recepie = new RecepieWindow();
             recepie.Show();
-            Close();
-            
+            Close();            
         }
     }
 }
