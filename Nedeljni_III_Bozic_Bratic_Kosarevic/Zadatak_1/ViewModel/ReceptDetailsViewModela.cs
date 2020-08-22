@@ -171,7 +171,7 @@ namespace Zadatak_1.ViewModel
                 editRecept.Author = recept.Author;
                 editRecept.ReceptText = recept.ReceptText;
 
-                AddEditReceptView addEditReceptWindow = new AddEditReceptView(true);
+                AddEditReceptView addEditReceptWindow = new AddEditReceptView(editRecept, true);
                 addEditReceptWindow.Show();
             }
             catch (Exception ex)

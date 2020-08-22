@@ -69,6 +69,7 @@
     <Compile Include="Converters\BoolToVisibilityInverseConverter.cs" />
     <Compile Include="Converters\DeleteBtnToVisibilitiConverter.cs" />
     <Compile Include="Converters\EditBtnToVisibilitiConverter.cs" />
+    <Compile Include="Converters\UserToEnableButtonConverter.cs" />
     <Compile Include="Models\Components.cs" />
     <Compile Include="Models\Recept.cs" />
     <Compile Include="Models\ReceptType.cs" />
