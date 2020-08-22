@@ -157,6 +157,7 @@
     </Page>
   </ItemGroup>
   <ItemGroup>
+    <Resource Include="ShoppingCart.txt" />
     <Content Include="StoreProcedures\Delete_Component.sql" />
     <Content Include="StoreProcedures\Get_AllComponents.sql" />
     <Content Include="StoreProcedures\Update_Component.sql" />

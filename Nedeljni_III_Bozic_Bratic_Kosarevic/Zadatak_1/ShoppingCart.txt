@@ -1,0 +1,3 @@
+Component name: mleko. Amount: 1
+Component name: jaja. Amount: 1
+Time: 8/22/2020 1:55:15 PM
