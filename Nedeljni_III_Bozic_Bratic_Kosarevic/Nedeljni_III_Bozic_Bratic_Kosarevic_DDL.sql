@@ -62,25 +62,25 @@ Add foreign key (TypeID) references tblType(TypeID);
 Alter Table tblComponents
 Add foreign key (ReceptID) references tblRecept(ReceptID);
 
-insert into tblUser values('Aca', 'aca', 'A?????s?e8?B0F?]???\f?l%H?%');
---Password acasaca
-insert into tblRecept values(2, 1, 'Recepie 1', 5, 'Author 1', 'Recepie Text 1', '1-1-2020');
-insert into tblRecept values(2, 1, 'Recepie 2', 5, 'Author 1', 'Recepie Text 1', '1-1-2019');
-insert into tblRecept values(2, 1, 'Recepie 3', 5, 'Author 1', 'Recepie Text 1', '1-1-2018');
+insert into tblUser values('Aca', 'aca', 'A?????s?e8?B0F?]???\f?l%H?%'); --Password acasaca
 
-insert into tblComponents values (1, 'mesto', 3);
+insert into tblRecept values(2, 1, 'Recepie 1', 3, 'Author 1', 'Recepie Text 1', '1-1-2020');
+insert into tblRecept values(2, 2, 'Recepie 2', 4, 'Author 1', 'Recepie Text 1', '1-1-2019');
+insert into tblRecept values(2, 3, 'Recepie 3', 5, 'Author 1', 'Recepie Text 1', '1-1-2018');
+
+insert into tblComponents values (1, 'pavlaka', 3);
 insert into tblComponents values (1, 'mleko', 3);
 insert into tblComponents values (1, 'jaja', 3);
-insert into tblComponents values (2, 'mesto', 3);
-insert into tblComponents values (1, 'mleko', 3);
-insert into tblComponents values (3, 'jaja', 3);
-insert into tblComponents values (3, 'mesto', 3);
-insert into tblComponents values (3, 'mleko', 3);
-insert into tblComponents values (2, 'jaja', 3);
+insert into tblComponents values (2, 'pavlaka', 3);
+insert into tblComponents values (2, 'djumbir', 3);
+insert into tblComponents values (2, 'cevapi', 3);
+insert into tblComponents values (3, 'lignja', 3);
+insert into tblComponents values (3, 'skusa', 3);
+insert into tblComponents values (3, 'becka', 3);
 
 select * from tblRecept
 select * from tblUser
-exec Get_AllReceptsComponentsNumber @ReceptID = 1;
+select * from tblComponents
 
 CREATE PROCEDURE Get_AllRecepts 
 AS
@@ -93,4 +93,91 @@ AS
 SELECT COUNT(*) NumberOfComponents FROM tblComponents c
 left join tblRecept r on r.ReceptID=c.ReceptID
 where c.ReceptID = @ReceptID
+GO
+
+ CREATE PROCEDURE  Get_AllReceptsByName
+  @ReceptName nvarchar(50)
+  as 
+	select * from tblRecept
+	left join tblType on tblRecept.TypeID=tblType.TypeID
+    where  ReceptName LIKE '%'+ @ReceptName +'%'
+go
+
+ CREATE PROCEDURE  Get_AllReceptsByType
+  @TypeName nvarchar(50)
+  as 
+	select * from tblRecept
+	left join tblType on tblRecept.TypeID=tblType.TypeID
+    where  TypeName LIKE '%'+ @TypeName +'%'
+go
+
+CREATE PROCEDURE Get_AllReceptsByComponents
+ @searchComponent nvarchar(MAX)
+ as
+	select * from tblRecept r
+	left join tblType on r.TypeID=tblType.TypeID 
+	left join tblComponents on r.ReceptID=tblComponents.ReceptID
+    WHERE ComponentName LIKE '%'+ @searchComponent +'%'
+go
+
+CREATE PROCEDURE Get_AllComponentsByReceptId
+@ReceptID int
+AS
+	select ComponentID, ReceptID, ComponentName, ComponentAmount from tblComponents
+	where ReceptID=@ReceptID
+GO
+
+CREATE PROCEDURE Get_AllTypes
+AS
+	select TypeID, TypeName  from tblType
+GO
+
+CREATE PROCEDURE Update_Component
+@ComponentID int, @ReceptID int, @ComponentName nvarchar(50), @ComponentAmount int
+AS
+	update tblComponents set  
+	ReceptID=@ReceptID,
+	ComponentName=@ComponentName,
+	ComponentAmount=@ComponentAmount
+	where ComponentID=@ComponentID
+
+GO
+
+CREATE PROCEDURE Update_Recept
+	@ReceptID int, @UserID int, @TypeID int, @ReceptName nvarchar(100), @PersonNumber int, 
+	@Author nvarchar(100),  @ReceptText nvarchar(400),  @CreationDate date
+AS
+	update tblRecept set  
+	UserID=@UserID,
+	TypeID=@TypeID,
+	ReceptName=@ReceptName,
+	PersonNumber=@PersonNumber,
+	Author=@Author,
+	ReceptText=@ReceptText,
+	CreationDate=@CreationDate
+	where ReceptID=@ReceptID
+
+GO
+
+CREATE PROCEDURE Delete_Component
+@ComponentID int
+as
+Delete from tblComponents where ComponentID=@ComponentID
+go
+
+CREATE PROCEDURE Insert_Recept
+	@UserID int, @TypeID int, @ReceptName nvarchar(100), @PersonNumber int, @Author nvarchar(100),  @ReceptText nvarchar(400), @CreationDate date
+AS
+	insert into tblRecept(UserID, TypeID, ReceptName, PersonNumber, Author, ReceptText, CreationDate) 
+	Values(@UserID, @TypeID, @ReceptName, @PersonNumber, @Author, @ReceptText, @CreationDate)
+	select SCOPE_IDENTITY()
+
+GO
+
+CREATE  PROCEDURE Insert_Components
+	@ReceptID int, @ComponentName nvarchar(50), @ComponentAmount int
+AS
+	insert into tblComponents(ReceptID, ComponentName, ComponentAmount) 
+	Values(@ReceptID, @ComponentName, @ComponentAmount)
+	select SCOPE_IDENTITY()
 GO

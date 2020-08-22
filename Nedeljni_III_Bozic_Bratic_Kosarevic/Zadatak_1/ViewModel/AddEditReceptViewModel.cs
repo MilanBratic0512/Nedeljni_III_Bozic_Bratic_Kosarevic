@@ -20,11 +20,14 @@ namespace Zadatak_1.ViewModel
         AddEditReceptView addEditReceptView;
         ServiceCode service = new ServiceCode();
         #region Constructor
-        public AddEditReceptViewModel(AddEditReceptView addEditReceptViewOpen, bool isForEdit)
+        public AddEditReceptViewModel(Recept recept,AddEditReceptView addEditReceptViewOpen, bool isForEdit)
         {
             this.isForEdit = isForEdit;
+            this.recept = recept;
             addEditReceptView = addEditReceptViewOpen;
-            ReceptTypsList = new ObservableCollection<ReceptType>(service.GettAllTypes());            
+            ReceptTypsList = new ObservableCollection<ReceptType>(service.GettAllTypes());
+            SelectedReceptTyps = ReceptTypsList.FirstOrDefault(p => p.TypeID == recept.TypeId);
+            TemporaryComponentList= new ObservableCollection<Components>(service.GettAllComponentsByReceptId(recept.ReceptId));
         }
         #endregion
 
@@ -150,7 +153,7 @@ namespace Zadatak_1.ViewModel
         }
         #endregion
 
-        #region        
+        #region Commands       
 
         public void AddAddComponentToList()
         {
@@ -171,7 +174,15 @@ namespace Zadatak_1.ViewModel
         {
             try
             {
-                temporaryComponentList.Remove(selectedComponents);
+                if(selectedComponents.ComponentId==0)
+                {
+                    temporaryComponentList.Remove(selectedComponents);
+                }
+                else
+                {
+                    service.DeleteComponent(selectedComponents.ComponentId);
+                    temporaryComponentList.Remove(selectedComponents);
+                }                
             }
             catch (Exception ex)
             {
@@ -222,23 +233,33 @@ namespace Zadatak_1.ViewModel
                 }
                 else
                 {
-                    // int receptId = service.UpdateRecept(Recept);
-                    foreach (Components component in TemporaryComponentList)
+                    if (service.UpdateRecept(Recept))
                     {
-                        if(component.ReceptId==0)
+                        foreach (Components component in TemporaryComponentList)
                         {
-                            //component.ReceptId = receptId;
-                        }                        
-                    }
+                            if (component.ReceptId == 0)
+                            {
+                                component.ReceptId = recept.ReceptId;
+                            }
+                        }
 
-                    foreach (Components component in TemporaryComponentList)
-                    {
-                        service.AddComponent(component);
+                        foreach (Components component in TemporaryComponentList)
+                        {
+                            if (component.ComponentId==0)
+                            {                           
+                                service.AddComponent(component);
+                            }
+                            else
+                            {
+                                service.UpdateComponent(component);
+                            }
+                        }              
+                        
+                        MessageBox.Show("You have successfully changed recept");
+                        RecepieWindow recepieWindowWindow = new RecepieWindow();
+                        recepieWindowWindow.Show();
+                        addEditReceptView.Close();
                     }
-                    MessageBox.Show("You have successfully changed recept");
-                    RecepieWindow recepieWindowWindow = new RecepieWindow();
-                    recepieWindowWindow.Show();
-                    addEditReceptView.Close();
                 }
             }
             catch (Exception ex)

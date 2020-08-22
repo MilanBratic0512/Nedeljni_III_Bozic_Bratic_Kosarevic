@@ -3,6 +3,7 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        WindowStartupLocation="CenterScreen"
         xmlns:local="clr-namespace:Zadatak_1.View"
         xmlns:converters="clr-namespace:Zadatak_1.Converters"
         mc:Ignorable="d"
@@ -116,7 +117,6 @@
         </DataGrid>
 
         <Button Grid.Column="13" Grid.Row="5" Name="btnAdd" Content="Add" IsEnabled="False" Height="20" 
-                Visibility="{Binding IsForEdit, Converter={StaticResource BoolToVisibilityInverseConverter}}"
                 Width="70" HorizontalAlignment="Left" Click="btnAdd_Click"/>
         <Button Grid.Column="5" Grid.Row="19" Name="btnSave" Content="Add" IsEnabled="False" Height="20" 
                 Visibility="{Binding IsForEdit, Converter={StaticResource BoolToVisibilityInverseConverter}}"

@@ -11,6 +11,8 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using Zadatak_1.Models;
+using Zadatak_1.Validations;
 using Zadatak_1.ViewModel;
 
 namespace Zadatak_1.View
@@ -30,7 +32,7 @@ namespace Zadatak_1.View
 
         private void AddNewRecepie(object sender, RoutedEventArgs e)
         {
-            AddEditReceptView addEditReceptWindow = new AddEditReceptView(false);
+            AddEditReceptView addEditReceptWindow = new AddEditReceptView(new Recept(), false);
             addEditReceptWindow.Show();
             Close();
         }
@@ -44,9 +46,9 @@ namespace Zadatak_1.View
 
         private void EditRecepie(object sender, RoutedEventArgs e)
         {
-            AddEditReceptView addEditReceptWindow = new AddEditReceptView(true);
-            addEditReceptWindow.Show();
-            Close();
+            //AddEditReceptView addEditReceptWindow = new AddEditReceptView(true);
+            //addEditReceptWindow.Show();
+            //Close();
         }
 
         private void DeleteRecepie(object sender, RoutedEventArgs e)
@@ -60,5 +62,86 @@ namespace Zadatak_1.View
             shoppingCartView.Show();
         }
 
+        private void RecepieDetails(object sender, RoutedEventArgs e)
+        {
+            rvm.DetilsRecept();
+            Close();
+        }
+
+        private void Title_LostFocus(object sender, RoutedEventArgs e)
+        {
+            if (Type.Text == "" && TitleR.Text != "")
+            {
+                Type.IsEnabled = false;
+            }
+            else
+            {
+                Type.IsEnabled = true;
+            }
+        }
+
+        private void Type_LostFocus(object sender, RoutedEventArgs e)
+        {
+            if (TitleR.Text == "" && Type.Text != "")
+            {
+                TitleR.IsEnabled = false;
+            }
+            else
+            {
+                TitleR.IsEnabled = true;
+            }
+        }
+
+        private void ComponentsSearch(object sender, RoutedEventArgs e)
+        {
+            TitleR.Text = "";
+            Type.Text = "";
+            TitleR.IsEnabled = false;
+            Type.IsEnabled = false;
+            Components.IsEnabled = false;
+            OkBtn.IsEnabled = false;
+            ResetBtn.IsEnabled = false;
+            SearchByComponentsWindow window = new SearchByComponentsWindow(rvm);
+            window.Show();
+        }
+
+        private void BeginSearch(object sender, RoutedEventArgs e)
+        {
+            if (TitleR.Text != "")
+            {
+                if (SearchValidation.Validate(TitleR.Text))
+                {
+                    rvm.SearchByRecepieTitle();
+                    TitleR.IsEnabled = false;
+                    Type.IsEnabled = false;
+                    Components.IsEnabled = false;
+                    OkBtn.IsEnabled = false;
+                }
+            }
+            else
+            {
+                if (SearchValidation.Validate(Type.Text))
+                {
+                    rvm.SearchByRecepieType();
+                    TitleR.IsEnabled = false;
+                    Type.IsEnabled = false;
+                    Components.IsEnabled = false;
+                    OkBtn.IsEnabled = false;
+                }
+            }
+
+        }
+
+        private void ResetSearch(object sender, RoutedEventArgs e)
+        {
+            TitleR.Text = "";
+            Type.Text = "";
+            TitleR.IsEnabled = true;
+            Type.IsEnabled = true;
+            Components.IsEnabled = true;
+            OkBtn.IsEnabled = true;
+            rvm.Recepies.Clear();
+            rvm.FillList();
+        }
     }
 }

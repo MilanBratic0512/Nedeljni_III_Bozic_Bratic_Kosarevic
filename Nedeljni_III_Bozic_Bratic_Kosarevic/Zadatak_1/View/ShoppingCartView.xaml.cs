@@ -35,13 +35,24 @@ namespace Zadatak_1.View
         {
             Components components = (sender as Button).DataContext as Components;
             scvm.AddToCart(components);
-            datagrid2.Items.Refresh();
-            datagrid3.Items.Refresh();
+            try
+            {
+                datagrid2.Items.Refresh();
+                datagrid3.Items.Refresh();
+            }
+            catch (Exception)
+            {
+                MessageBox.Show("Error");
+            }
+
         }
 
         private void Buy(object sender, RoutedEventArgs e)
         {
-
+            scvm.WriteToTheFile();
+            scvm.UpdateDatabase();
+            MessageBox.Show("You have successfully purchased components.");
+            Close();
         }
     }
 }

@@ -1,0 +1,16 @@
+﻿<Window x:Class="Zadatak_1.View.SearchByComponentsWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        WindowStartupLocation="Manual" Left="1350" Top="295"
+        xmlns:local="clr-namespace:Zadatak_1.View"
+        mc:Ignorable="d"
+        Title="SearchByComponentsWindow" Height="450" Width="314.725">
+    <Grid>
+        <TextBox HorizontalAlignment="Left" Height="355" Margin="10,10,0,0" TextWrapping="Wrap" Text="{Binding Components, UpdateSourceTrigger=PropertyChanged}" VerticalAlignment="Top" Width="287"/>
+        <Button Click="BeginSearch" Content="Ok" HorizontalAlignment="Left" Margin="52,378,0,0" VerticalAlignment="Top" Width="75"/>
+        <Button Click="Cancel" Content="Cancel" HorizontalAlignment="Left" Margin="182,378,0,0" VerticalAlignment="Top" Width="75"/>
+
+    </Grid>
+</Window>
