@@ -119,3 +119,48 @@ CREATE PROCEDURE Get_AllReceptsByComponents
 	left join tblComponents on r.ReceptID=tblComponents.ReceptID
     WHERE ComponentName LIKE '%'+ @searchComponent +'%'
 go
+
+CREATE PROCEDURE Get_AllComponentsByReceptId
+@ReceptID int
+AS
+	select ComponentID, ReceptID, ComponentName, ComponentAmount from tblComponents
+	where ReceptID=@ReceptID
+GO
+
+CREATE PROCEDURE Get_AllTypes
+AS
+	select TypeID, TypeName  from tblType
+GO
+
+CREATE PROCEDURE Update_Component
+@ComponentID int, @ReceptID int, @ComponentName nvarchar(50), @ComponentAmount int
+AS
+	update tblComponents set  
+	ReceptID=@ReceptID,
+	ComponentName=@ComponentName,
+	ComponentAmount=@ComponentAmount
+	where ComponentID=@ComponentID
+
+GO
+
+CREATE PROCEDURE Update_Recept
+	@ReceptID int, @UserID int, @TypeID int, @ReceptName nvarchar(100), @PersonNumber int, 
+	@Author nvarchar(100),  @ReceptText nvarchar(400),  @CreationDate date
+AS
+	update tblRecept set  
+	UserID=@UserID,
+	TypeID=@TypeID,
+	ReceptName=@ReceptName,
+	PersonNumber=@PersonNumber,
+	Author=@Author,
+	ReceptText=@ReceptText,
+	CreationDate=@CreationDate
+	where ReceptID=@ReceptID
+
+GO
+
+CREATE PROCEDURE Delete_Component
+@ComponentID int
+as
+Delete from tblComponents where ComponentID=@ComponentID
+go

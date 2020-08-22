@@ -146,6 +146,28 @@ namespace Zadatak_1.ViewModel
             }
         }
 
+        public void DetilsRecept()
+        {
+            try
+            {
+                Recept detailsRecept = new Recept();
+                detailsRecept.ReceptId = recepie.ReceptId;
+                detailsRecept.UserId = recepie.UserId;
+                detailsRecept.TypeId = recepie.TypeId;
+                detailsRecept.ReceptName = recepie.ReceptName;
+                detailsRecept.PersonNumber = recepie.PersonNumber;
+                detailsRecept.Author = recepie.Author;
+                detailsRecept.ReceptText = recepie.ReceptText;
+
+                ReceptDetailsView receptDetailsView = new ReceptDetailsView(detailsRecept);
+                receptDetailsView.Show();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.ToString());
+            }
+        }
+
         public void DeleteRecepie()
         {
             using (var conn = new SqlConnection(ConfigurationManager.ConnectionStrings["con"].ToString()))
