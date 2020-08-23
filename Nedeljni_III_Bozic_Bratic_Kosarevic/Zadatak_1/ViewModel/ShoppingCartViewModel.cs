@@ -23,10 +23,25 @@ namespace Zadatak_1.ViewModel
 
         public ShoppingCartViewModel()
         {
+            AllComponents = new ObservableCollection<Components>();
             ShoppingCart = new ObservableCollection<Components>();
             ComponentsForRemove = new List<Components>();
         }
 
+        private Component component;
+
+        public Component Component
+        {
+            get { return component; }
+            set
+            {
+                if (component != value)
+                {
+                    component = value;
+                    OnPropertyChanged("Component");
+                }
+            }
+        }
 
         public void FillList()
         {

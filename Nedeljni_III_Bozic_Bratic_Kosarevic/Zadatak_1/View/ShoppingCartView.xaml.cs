@@ -52,8 +52,17 @@ namespace Zadatak_1.View
         private void Buy(object sender, RoutedEventArgs e)
         {
             scvm.WriteToTheFile();
-            scvm.UpdateDatabase();
+
             MessageBox.Show("You have successfully purchased components.");
+            RecepieWindow window = new RecepieWindow();
+            window.Show();
+            Close();
+        }
+
+        private void CancleBtn(object sender, RoutedEventArgs e)
+        {
+            RecepieWindow window = new RecepieWindow();
+            window.Show();
             Close();
         }
     }

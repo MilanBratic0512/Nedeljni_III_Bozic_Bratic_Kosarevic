@@ -183,6 +183,11 @@ AS
 	select SCOPE_IDENTITY()
 GO
 
+CREATE PROCEDURE Get_AllComponents
+AS
+	select ComponentID, ReceptID, ComponentName, ComponentAmount from tblComponents
+GO
+
 CREATE PROCEDURE Get_AllComponentsByInput
 @searchComponent nvarchar(MAX)
 AS

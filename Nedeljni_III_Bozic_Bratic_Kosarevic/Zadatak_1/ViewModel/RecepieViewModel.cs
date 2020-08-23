@@ -337,6 +337,8 @@ namespace Zadatak_1.ViewModel
             string[] words = components.Split(' ');
 
             Recepies.Clear();
+            UserHaveComponents.Clear();
+            MissingComponents.Clear();
 
             foreach (string s in words)
             {
@@ -361,9 +363,25 @@ namespace Zadatak_1.ViewModel
                             ComponentAmount = int.Parse(row1[3].ToString())
                         };
 
-                        UserHaveComponents.Add(c);
+                        bool contains = false;
+
+                        foreach (Components item in UserHaveComponents)
+                        {
+                            if (item.ComponentName == c.ComponentName)
+                            {
+                                contains = true;
+                                break;
+                            }
+                        }
+
+                        if(!contains)
+                        {
+                            UserHaveComponents.Add(c);
+                        }
                     }
+                    conn1.Close();
                 }
+
 
                 using (SqlConnection conn = new SqlConnection(ConfigurationManager.ConnectionStrings["con"].ToString()))
                 {
@@ -426,6 +444,7 @@ namespace Zadatak_1.ViewModel
                             Recepies.Add(r);
                         }
                     }
+                    conn.Close();
                 }
             }
         }
@@ -455,7 +474,7 @@ namespace Zadatak_1.ViewModel
 
                     foreach (Components item in UserHaveComponents)
                     {
-                        if(item.ComponentId == c.ComponentId)
+                        if(item.ComponentName == c.ComponentName)
                         {
                             contains = true;
                             break;
