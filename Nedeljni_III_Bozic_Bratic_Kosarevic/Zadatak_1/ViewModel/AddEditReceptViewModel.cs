@@ -207,12 +207,13 @@ namespace Zadatak_1.ViewModel
         {
             try
             {                
-                Recept.TypeId = selectedReceptTyps.TypeID;
-                Recept.UserId = LoginWindow.CurrentUser.UserId;
-                Recept.Author = LoginWindow.CurrentUser.FullName;
-                Recept.CreationDate = DateTime.Now;
                 if (Recept.ReceptId == 0)
                 {
+                    Recept.TypeId = selectedReceptTyps.TypeID;
+                    Recept.UserId = LoginWindow.CurrentUser.UserId;
+                    Recept.Author = LoginWindow.CurrentUser.FullName;
+                    Recept.CreationDate = DateTime.Now;
+
                     int receptId = service.AddRecept(Recept);
                     if (receptId != 0)
                     {
@@ -233,6 +234,12 @@ namespace Zadatak_1.ViewModel
                 }
                 else
                 {
+                    string receptName = recept.ReceptName;
+                    string receptAuthotName = recept.Author;
+                    Recept.TypeId = selectedReceptTyps.TypeID;
+                    Recept.UserId = LoginWindow.CurrentUser.UserId;
+                    Recept.Author = LoginWindow.CurrentUser.FullName;
+                    Recept.CreationDate = DateTime.Now;
                     if (service.UpdateRecept(Recept))
                     {
                         foreach (Components component in TemporaryComponentList)
@@ -253,9 +260,16 @@ namespace Zadatak_1.ViewModel
                             {
                                 service.UpdateComponent(component);
                             }
-                        }              
+                        }   
                         
-                        MessageBox.Show("You have successfully changed recept");
+                        if (receptAuthotName != recept.Author)
+                        {
+                            MessageBox.Show(string.Format("You have successfully changed recept :\n {0}, \nfrom author {1}!", receptName, receptAuthotName));
+                        }
+                        else
+                        {
+                            MessageBox.Show("You have successfully changed recept");
+                        }                                               
                         RecepieWindow recepieWindowWindow = new RecepieWindow();
                         recepieWindowWindow.Show();
                         addEditReceptView.Close();
