@@ -84,7 +84,7 @@
             </DataGrid.Columns>
         </DataGrid>
         <Button Grid.Column="5" Grid.Row="19" Name="btnEdit" Content="Edit"  Height="20" IsEnabled="True"                
-                Width="70" HorizontalAlignment="Left" Command="{Binding Save, UpdateSourceTrigger=PropertyChanged}"
+                Width="70" HorizontalAlignment="Left"
                 Click="btnEdit_Click"
                 >
             <Button.Visibility>
