@@ -9,8 +9,10 @@ using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Zadatak_1.Model;
 using Zadatak_1.Models;
 using Zadatak_1.Service;
+using Zadatak_1.View;
 
 namespace Zadatak_1.ViewModel
 {
@@ -42,6 +44,20 @@ namespace Zadatak_1.ViewModel
                     component = value;
                     OnPropertyChanged("Component");
                 }
+            }
+        }
+
+        private User user = LoginWindow.CurrentUser;
+        public User User
+        {
+            get
+            {
+                return user;
+            }
+            set
+            {
+                user = value;
+                OnPropertyChanged("User");
             }
         }
 

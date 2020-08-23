@@ -67,6 +67,7 @@
     <Compile Include="Commands\RelayCommand.cs" />
     <Compile Include="Converters\BoolToVisibilityConverter.cs" />
     <Compile Include="Converters\BoolToVisibilityInverseConverter.cs" />
+    <Compile Include="Converters\BuyToVisibilitiConverter.cs" />
     <Compile Include="Converters\DeleteBtnToVisibilitiConverter.cs" />
     <Compile Include="Converters\EditBtnToVisibilitiConverter.cs" />
     <Compile Include="Converters\UserToEnableButtonConverter.cs" />

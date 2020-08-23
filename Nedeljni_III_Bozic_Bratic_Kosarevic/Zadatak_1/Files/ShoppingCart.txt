@@ -1,1 +1,4 @@
-Time: 8/23/2020 5:13:45 PM
+Component name: pavlaka. Amount: 3
+Component name: mleko. Amount: 3
+Component name: jaja. Amount: 3
+Time: 8/23/2020 6:04:14 PM

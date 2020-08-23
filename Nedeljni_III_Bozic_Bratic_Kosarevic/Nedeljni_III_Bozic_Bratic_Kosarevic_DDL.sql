@@ -194,3 +194,4 @@ AS
 	select * from tblComponents
 	where  ComponentName LIKE '%'+ @searchComponent +'%'
 GO
+

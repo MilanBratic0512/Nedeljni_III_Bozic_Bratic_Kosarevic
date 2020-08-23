@@ -4,9 +4,15 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         WindowStartupLocation="CenterScreen"
+        xmlns:converters="clr-namespace:Zadatak_1.Converters"
         xmlns:local="clr-namespace:Zadatak_1.View"
         mc:Ignorable="d"
         Title="ShoppingCartView" Height="450" Width="800">
+    <Window.Resources>
+        <ResourceDictionary>
+            <converters:BuyToVisibilitiConverter x:Key="BuyToVisibilitiConverter" />
+        </ResourceDictionary>
+    </Window.Resources>
     <Grid>
         <DataGrid x:Name="datagrid2" ItemsSource="{Binding AllComponents}" AutoGenerateColumns="False" CanUserAddRows="False" Height="288" Width="772" Margin="10,87,10,44" HorizontalAlignment="Center">
             <DataGrid.Columns>
@@ -22,13 +28,14 @@
 
             </DataGrid.Columns>
         </DataGrid>
-        <DataGrid x:Name="datagrid3" ItemsSource="{Binding ShoppingCart}" AutoGenerateColumns="False" CanUserAddRows="False" Width="772" Margin="10,275,10,44" HorizontalAlignment="Center" SelectedItem="{Binding Component, UpdateSourceTrigger=PropertyChanged}">
+        <DataGrid x:Name="datagrid3" ItemsSource="{Binding ShoppingCart}" AutoGenerateColumns="False" CanUserAddRows="False" Width="772" Margin="10,275,10,44" HorizontalAlignment="Center" SelectedItem="{Binding Component, UpdateSourceTrigger=PropertyChanged}"
+                  Visibility="{Binding User.Username, Converter={StaticResource BuyToVisibilitiConverter}}">
             <DataGrid.Columns>
                 <DataGridTextColumn Header="Component name" Binding="{Binding ComponentName}" IsReadOnly="True"/>
                 <DataGridTextColumn Header="Component amount" Binding="{Binding ComponentAmount}" IsReadOnly="True"/>
             </DataGrid.Columns>
         </DataGrid>
-        <Button Content="Buy" HorizontalAlignment="Left" Margin="10,380,0,0" VerticalAlignment="Top" Width="75" Click="Buy"/>
+        <Button Content="Buy" HorizontalAlignment="Left" Margin="10,380,0,0" VerticalAlignment="Top" Width="75" Click="Buy" Visibility="{Binding User.Username, Converter={StaticResource BuyToVisibilitiConverter}}"/>
         <Label Content="Offer components" HorizontalAlignment="Left" Margin="10,36,0,0" VerticalAlignment="Top" Height="34" Width="163"/>
         <Button Content="Cancel" HorizontalAlignment="Left" Margin="707,380,0,0" VerticalAlignment="Top" Width="75" Click="CancleBtn"/>
         <Label Content="Number of persons:" HorizontalAlignment="Left" Margin="242,36,0,0" VerticalAlignment="Top"/>
