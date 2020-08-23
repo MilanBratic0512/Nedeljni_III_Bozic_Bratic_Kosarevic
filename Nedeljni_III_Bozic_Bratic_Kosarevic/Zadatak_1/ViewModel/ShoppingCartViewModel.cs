@@ -18,14 +18,16 @@ namespace Zadatak_1.ViewModel
     {
         ServiceCode service = new ServiceCode();
         public ObservableCollection<Components> AllComponents { get; set; }
+        public ObservableCollection<Components> InitialComponets { get; set; }
+        public ObservableCollection<Components> TempList { get; set; }
         public ObservableCollection<Components> ShoppingCart { get; set; }
         private List<Components> ComponentsForRemove;
 
         public ShoppingCartViewModel()
         {
+            ComponentsForRemove = new List<Components>();
             AllComponents = new ObservableCollection<Components>();
             ShoppingCart = new ObservableCollection<Components>();
-            ComponentsForRemove = new List<Components>();
         }
 
         private Component component;
@@ -43,31 +45,32 @@ namespace Zadatak_1.ViewModel
             }
         }
 
-        public void FillList()
+        private Recept recepie;
+
+        public Recept Recepie
         {
-            using (SqlConnection conn = new SqlConnection(ConfigurationManager.ConnectionStrings["con"].ToString()))
+            get { return recepie; }
+            set
             {
-                SqlCommand query = new SqlCommand(@"exec Get_AllComponents", conn);
-                conn.Open();
-                SqlDataAdapter sqlDataAdapter = new SqlDataAdapter(query);
-                DataTable dataTable = new DataTable();
-                sqlDataAdapter.Fill(dataTable);
-
-                if (AllComponents == null)
-                    AllComponents = new ObservableCollection<Components>();
-
-                foreach (DataRow row in dataTable.Rows)
+                if (recepie != value)
                 {
-                    Components r = new Components
-                    {
+                    recepie = value;
+                    OnPropertyChanged("Recepie");
+                }
+            }
+        }
 
-                        ComponentId = int.Parse(row[0].ToString()),
-                        ReceptId = int.Parse(row[1].ToString()),
-                        ComponentName = row[2].ToString(),
-                        ComponentAmount = int.Parse(row[3].ToString()),
-                    };
+        private int numberOfPersonsInput;
 
-                    AllComponents.Add(r);
+        public int NumberOfPersonsInput
+        {
+            get { return numberOfPersonsInput; }
+            set
+            {
+                if (numberOfPersonsInput != value)
+                {
+                    numberOfPersonsInput = value;
+                    OnPropertyChanged("NumberOfPersonsInput");
                 }
             }
         }
@@ -109,7 +112,7 @@ namespace Zadatak_1.ViewModel
                 lines[i] = "Component name: " + array[i].ComponentName + ". Amount: " + array[i].ComponentAmount;
             }
 
-            using (StreamWriter file = new StreamWriter("..\\..\\ShoppingCart.txt"))
+            using (StreamWriter file = new StreamWriter(@"..\\..\Files\ShoppingCart.txt"))
             {
                 foreach (string line in lines)
                 {
@@ -131,6 +134,24 @@ namespace Zadatak_1.ViewModel
             }
 
         }
+
+        public void CalculateComponent(ObservableCollection<Components> list, int numberOfPersonByRecept, int numberOfPersonsInput)
+        {
+            ObservableCollection<Components> result = new ObservableCollection<Components>();
+            var temp = list;
+
+            double numCalculation = (double)numberOfPersonsInput / (double)numberOfPersonByRecept;
+
+            for (int i = 0; i < temp.Count; i++)
+            {
+                temp[i].ComponentAmount = (int)(temp[i].ComponentAmount * numCalculation);
+                result.Add(temp[i]); 
+            }
+
+            AllComponents = result;
+            OnPropertyChanged("AllComponents");
+        }
+
         public event PropertyChangedEventHandler PropertyChanged;
 
         private void OnPropertyChanged(string propertyName)

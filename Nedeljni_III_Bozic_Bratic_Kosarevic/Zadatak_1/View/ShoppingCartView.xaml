@@ -8,8 +8,7 @@
         mc:Ignorable="d"
         Title="ShoppingCartView" Height="450" Width="800">
     <Grid>
-        <DataGrid x:Name="datagrid2" ItemsSource="{Binding AllComponents}" AutoGenerateColumns="False" CanUserAddRows="False"
-Height="288" Width="772" Margin="10,87,10,44" HorizontalAlignment="Center">
+        <DataGrid x:Name="datagrid2" ItemsSource="{Binding AllComponents}" AutoGenerateColumns="False" CanUserAddRows="False" Height="288" Width="772" Margin="10,87,10,44" HorizontalAlignment="Center">
             <DataGrid.Columns>
                 <DataGridTextColumn Header="Component name" Binding="{Binding ComponentName}" IsReadOnly="True"/>
                 <DataGridTextColumn Header="Component amount" Binding="{Binding ComponentAmount}" IsReadOnly="True"/>
@@ -23,7 +22,7 @@ Height="288" Width="772" Margin="10,87,10,44" HorizontalAlignment="Center">
 
             </DataGrid.Columns>
         </DataGrid>
-        <DataGrid x:Name="datagrid3" ItemsSource="{Binding ShoppingCart}" AutoGenerateColumns="False" CanUserAddRows="False" Width="772" Margin="10,275,10,44" HorizontalAlignment="Center" SelectedItem="{Binding Component, UpdateSourceTrigger=Default}">
+        <DataGrid x:Name="datagrid3" ItemsSource="{Binding ShoppingCart}" AutoGenerateColumns="False" CanUserAddRows="False" Width="772" Margin="10,275,10,44" HorizontalAlignment="Center" SelectedItem="{Binding Component, UpdateSourceTrigger=PropertyChanged}">
             <DataGrid.Columns>
                 <DataGridTextColumn Header="Component name" Binding="{Binding ComponentName}" IsReadOnly="True"/>
                 <DataGridTextColumn Header="Component amount" Binding="{Binding ComponentAmount}" IsReadOnly="True"/>
@@ -32,5 +31,8 @@ Height="288" Width="772" Margin="10,87,10,44" HorizontalAlignment="Center">
         <Button Content="Buy" HorizontalAlignment="Left" Margin="10,380,0,0" VerticalAlignment="Top" Width="75" Click="Buy"/>
         <Label Content="Offer components" HorizontalAlignment="Left" Margin="10,36,0,0" VerticalAlignment="Top" Height="34" Width="163"/>
         <Button Content="Cancel" HorizontalAlignment="Left" Margin="707,380,0,0" VerticalAlignment="Top" Width="75" Click="CancleBtn"/>
+        <Label Content="Number of persons:" HorizontalAlignment="Left" Margin="242,36,0,0" VerticalAlignment="Top"/>
+        <TextBox x:Name="NumOfPersons" HorizontalAlignment="Left" Height="23" Margin="372,39,0,0" TextWrapping="Wrap" Text="{Binding NumberOfPersonsInput, UpdateSourceTrigger=PropertyChanged}" VerticalAlignment="Top" Width="120"/>
+        <Button x:Name="BtnOk" Content="OK" HorizontalAlignment="Left" Margin="510,39,0,0" VerticalAlignment="Top" Width="47" Height="23" Click="CalculateComponentsBtn"/>
     </Grid>
 </Window>

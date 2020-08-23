@@ -24,11 +24,14 @@ namespace Zadatak_1.View
     {
         ShoppingCartViewModel scvm = new ShoppingCartViewModel();
 
-        public ShoppingCartView(ObservableCollection<Components> MissingComponents)
+        public ShoppingCartView(ObservableCollection<Components> MissingComponents, Recept recepie)
         {
             InitializeComponent();
             scvm.AllComponents = MissingComponents;
+            scvm.InitialComponets = MissingComponents;
+            scvm.Recepie = recepie;
             DataContext = scvm;
+            scvm.NumberOfPersonsInput = recepie.PersonNumber;
         }
 
 
@@ -64,6 +67,13 @@ namespace Zadatak_1.View
             RecepieWindow window = new RecepieWindow();
             window.Show();
             Close();
+        }
+
+        private void CalculateComponentsBtn(object sender, RoutedEventArgs e)
+        {
+            BtnOk.IsEnabled = false;
+            NumOfPersons.IsEnabled = false;
+            scvm.CalculateComponent(scvm.InitialComponets, scvm.Recepie.PersonNumber, scvm.NumberOfPersonsInput);
         }
     }
 }

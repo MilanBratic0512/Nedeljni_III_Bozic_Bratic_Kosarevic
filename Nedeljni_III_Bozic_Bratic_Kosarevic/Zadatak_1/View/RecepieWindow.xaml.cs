@@ -60,7 +60,7 @@ namespace Zadatak_1.View
         {
             rvm.FilterRemainingComponets();
 
-            ShoppingCartView shoppingCartView = new ShoppingCartView(rvm.MissingComponents);
+            ShoppingCartView shoppingCartView = new ShoppingCartView(rvm.MissingComponents, rvm.Recepie);
             shoppingCartView.Show();
             Close();
         }
