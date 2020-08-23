@@ -120,14 +120,11 @@ namespace Zadatak_1.View
             }
             else
             {
-                if (SearchValidation.Validate(Type.Text))
-                {
-                    rvm.SearchByRecepieType();
-                    TitleR.IsEnabled = false;
-                    Type.IsEnabled = false;
-                    Components.IsEnabled = false;
-                    OkBtn.IsEnabled = false;
-                }
+                rvm.SearchByRecepieType();
+                TitleR.IsEnabled = false;
+                Type.IsEnabled = false;
+                Components.IsEnabled = false;
+                OkBtn.IsEnabled = false;
             }
 
         }

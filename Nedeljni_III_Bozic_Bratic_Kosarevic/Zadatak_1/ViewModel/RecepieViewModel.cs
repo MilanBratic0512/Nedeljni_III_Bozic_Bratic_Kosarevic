@@ -21,11 +21,11 @@ namespace Zadatak_1.ViewModel
 
         public RecepieViewModel()
         {
-            FillList();
             Recepie = new Recept();
+            TypeName = new List<string>();
             RecepieName = "";
-            TypeName = "";
             Components = "";
+            FillList();
         }
 
         private Recept recepie;
@@ -58,9 +58,24 @@ namespace Zadatak_1.ViewModel
             }
         }
 
-        private string typeName;
+        private string selectedType;
 
-        public string TypeName
+        public string SelectedType
+        {
+            get { return selectedType; }
+            set
+            {
+                if (selectedType != value)
+                {
+                    selectedType = value;
+                    OnPropertyChanged("SelectedType");
+                }
+            }
+        }
+
+        private List<string> typeName;
+
+        public List<string> TypeName
         {
             get { return typeName; }
             set
@@ -90,6 +105,20 @@ namespace Zadatak_1.ViewModel
 
         public void FillList()
         {
+            using (SqlConnection conn1 = new SqlConnection(ConfigurationManager.ConnectionStrings["con"].ToString()))
+            {
+                SqlCommand query1 = new SqlCommand(@"select * from tblType;", conn1);
+                conn1.Open();
+                SqlDataAdapter sqlDataAdapter1 = new SqlDataAdapter(query1);
+                DataTable dataTable1 = new DataTable();
+                sqlDataAdapter1.Fill(dataTable1);
+
+                foreach (DataRow row1 in dataTable1.Rows)
+                {
+                    typeName.Add(row1[1].ToString());
+                }
+            }
+
             using (SqlConnection conn = new SqlConnection(ConfigurationManager.ConnectionStrings["con"].ToString()))
             {
                 SqlCommand query = new SqlCommand(@"exec Get_AllRecepts", conn);
@@ -245,7 +274,7 @@ namespace Zadatak_1.ViewModel
             using (SqlConnection conn = new SqlConnection(ConfigurationManager.ConnectionStrings["con"].ToString()))
             {
                 SqlCommand query = new SqlCommand(@"exec Get_AllReceptsByType @TypeName", conn);
-                query.Parameters.AddWithValue("@TypeName", typeName);
+                query.Parameters.AddWithValue("@TypeName", selectedType);
                 conn.Open();
                 SqlDataAdapter sqlDataAdapter = new SqlDataAdapter(query);
                 DataTable dataTable = new DataTable();
