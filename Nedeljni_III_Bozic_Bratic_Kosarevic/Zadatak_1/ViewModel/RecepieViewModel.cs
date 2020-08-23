@@ -470,6 +470,15 @@ namespace Zadatak_1.ViewModel
                         ComponentAmount = int.Parse(row1[3].ToString())
                     };
 
+                    if (LoginWindow.CurrentUser.Username == "Admin")
+                    {
+                        c.CanAddToCart = false;
+                    }
+                    if (LoginWindow.CurrentUser.Username != "Admin")
+                    {
+                        c.CanAddToCart = true;
+                    }
+
                     bool contains = false;
 
                     foreach (Components item in UserHaveComponents)

@@ -12,5 +12,6 @@ namespace Zadatak_1.Models
         public int ReceptId { get; set; }
         public string ComponentName { get; set; }
         public int ComponentAmount { get; set; }
+        public bool CanAddToCart { get; set; }
     }
 }

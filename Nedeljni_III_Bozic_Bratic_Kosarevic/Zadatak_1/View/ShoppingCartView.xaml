@@ -21,7 +21,7 @@
                 <DataGridTemplateColumn Header="Add to cart">
                     <DataGridTemplateColumn.CellTemplate>
                         <DataTemplate>
-                            <Button Click="AddToCart" Content="cart"/>
+                            <Button IsEnabled="{Binding CanAddToCart}" Click="AddToCart" Content="cart"/>
                         </DataTemplate>
                     </DataGridTemplateColumn.CellTemplate>
                 </DataGridTemplateColumn>
