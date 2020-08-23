@@ -11,6 +11,7 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using Zadatak_1.Validations;
 using Zadatak_1.ViewModel;
 
 namespace Zadatak_1.View
@@ -32,20 +33,34 @@ namespace Zadatak_1.View
 
         private void BeginSearch(object sender, RoutedEventArgs e)
         {
-            rvm1.SearchByRecepieComponent();
+            if (SearchValidation.Validate(rvm1.Components))
+            {
+                rvm1.SearchByRecepieComponent();
 
+                foreach (Window window in Application.Current.Windows)
+                {
+                    if (window.GetType() == typeof(RecepieWindow))
+                    {
+                        (window as RecepieWindow).ResetBtn.IsEnabled = true;
+                    }
+                }
+                Close(); 
+            }
+        }
+
+        private void Cancel(object sender, RoutedEventArgs e)
+        {
             foreach (Window window in Application.Current.Windows)
             {
                 if (window.GetType() == typeof(RecepieWindow))
                 {
                     (window as RecepieWindow).ResetBtn.IsEnabled = true;
+                    (window as RecepieWindow).TitleR.IsEnabled = true;
+                    (window as RecepieWindow).Type.IsEnabled = true;
+                    (window as RecepieWindow).Components.IsEnabled = true;
+                    (window as RecepieWindow).OkBtn.IsEnabled = true;
                 }
             }
-            Close();
-        }
-
-        private void Cancel(object sender, RoutedEventArgs e)
-        {
             Close();
         }
     }

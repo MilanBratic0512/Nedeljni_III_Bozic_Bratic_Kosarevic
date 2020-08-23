@@ -12,6 +12,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 using Zadatak_1.Models;
+using Zadatak_1.Validations;
 using Zadatak_1.ViewModel;
 
 namespace Zadatak_1.View
@@ -106,18 +107,29 @@ namespace Zadatak_1.View
 
         private void BeginSearch(object sender, RoutedEventArgs e)
         {
-            TitleR.IsEnabled = false;
-            Type.IsEnabled = false;
-            Components.IsEnabled = false;
-
             if (TitleR.Text != "")
             {
-                rvm.SearchByRecepieTitle();
+                if (SearchValidation.Validate(TitleR.Text))
+                {
+                    rvm.SearchByRecepieTitle();
+                    TitleR.IsEnabled = false;
+                    Type.IsEnabled = false;
+                    Components.IsEnabled = false;
+                    OkBtn.IsEnabled = false;
+                }
             }
             else
             {
-                rvm.SearchByRecepieType();
+                if (SearchValidation.Validate(Type.Text))
+                {
+                    rvm.SearchByRecepieType();
+                    TitleR.IsEnabled = false;
+                    Type.IsEnabled = false;
+                    Components.IsEnabled = false;
+                    OkBtn.IsEnabled = false;
+                }
             }
+
         }
 
         private void ResetSearch(object sender, RoutedEventArgs e)

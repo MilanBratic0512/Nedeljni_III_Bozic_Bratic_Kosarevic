@@ -5,23 +5,28 @@ using System.ComponentModel;
 using System.Configuration;
 using System.Data;
 using System.Data.SqlClient;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Zadatak_1.Models;
+using Zadatak_1.Service;
 
 namespace Zadatak_1.ViewModel
 {
     class ShoppingCartViewModel : INotifyPropertyChanged
     {
+        ServiceCode service = new ServiceCode();
         public ObservableCollection<Components> AllComponents { get; set; }
         public ObservableCollection<Components> ShoppingCart { get; set; }
+        private List<Components> ComponentsForRemove;
 
         public ShoppingCartViewModel()
         {
 
             FillList();
             ShoppingCart = new ObservableCollection<Components>();
+            ComponentsForRemove = new List<Components>();
         }
 
 
@@ -76,12 +81,43 @@ namespace Zadatak_1.ViewModel
             if (components.ComponentAmount == 0)
             {
                 AllComponents.Remove(components);
+                ComponentsForRemove.Add(components);
             }
 
             OnPropertyChanged("AllComponents");
 
         }
+        public void WriteToTheFile()
+        {
+            Components[] array = ShoppingCart.ToArray();
+            string[] lines = new string[array.Length];
+            for (int i = 0; i < lines.Length; i++)
+            {
+                lines[i] = "Component name: " + array[i].ComponentName + ". Amount: " + array[i].ComponentAmount;
+            }
 
+            using (StreamWriter file = new StreamWriter("..\\..\\ShoppingCart.txt"))
+            {
+                foreach (string line in lines)
+                {
+                    file.WriteLine(line);
+                }
+                file.WriteLine("Time: " + DateTime.Now.ToString());
+            }
+        }
+        public void UpdateDatabase()
+        {
+            foreach (Components components in AllComponents)
+            {
+                service.UpdateComponent(components);
+            }
+
+            foreach (Components componentsToRemove in ComponentsForRemove)
+            {
+                service.DeleteComponent(componentsToRemove.ComponentId);
+            }
+
+        }
         public event PropertyChangedEventHandler PropertyChanged;
 
         private void OnPropertyChanged(string propertyName)

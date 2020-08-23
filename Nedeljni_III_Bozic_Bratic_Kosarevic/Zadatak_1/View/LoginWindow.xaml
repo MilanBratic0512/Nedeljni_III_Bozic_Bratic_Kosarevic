@@ -4,7 +4,6 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         WindowStartupLocation="CenterScreen"
-        
         Title="Login" Height="319" Width="300" FontSize="14" Background="#04c582">
     <Border Background="#2e3137" CornerRadius="20" Margin="20">
         <StackPanel Margin="20">

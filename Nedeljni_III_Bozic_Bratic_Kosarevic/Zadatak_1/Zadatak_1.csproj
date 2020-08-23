@@ -75,6 +75,7 @@
     <Compile Include="Models\ReceptType.cs" />
     <Compile Include="Models\User.cs" />
     <Compile Include="Service\ServiceCode.cs" />
+    <Compile Include="Validations\SearchValidation.cs" />
     <Compile Include="Validations\UserValidation.cs" />
     <Compile Include="ViewModel\AddEditReceptViewModel.cs" />
     <Compile Include="ViewModel\ReceptDetailsViewModela.cs" />
@@ -156,6 +157,7 @@
     </Page>
   </ItemGroup>
   <ItemGroup>
+    <Resource Include="ShoppingCart.txt" />
     <Content Include="StoreProcedures\Delete_Component.sql" />
     <Content Include="StoreProcedures\Get_AllComponents.sql" />
     <Content Include="StoreProcedures\Update_Component.sql" />
