@@ -32,12 +32,14 @@ namespace Zadatak_1.View
             scvm.Recepie = recepie;
             DataContext = scvm;
             scvm.NumberOfPersonsInput = recepie.PersonNumber;
+            BtnBuy.IsEnabled = false;
         }
 
 
 
         private void AddToCart(object sender, RoutedEventArgs e)
         {
+            BtnBuy.IsEnabled = true;
             Components components = (sender as Button).DataContext as Components;
             scvm.AddToCart(components);
             try

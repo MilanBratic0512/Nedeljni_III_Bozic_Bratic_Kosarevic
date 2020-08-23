@@ -35,7 +35,7 @@
                 <DataGridTextColumn Header="Component amount" Binding="{Binding ComponentAmount}" IsReadOnly="True"/>
             </DataGrid.Columns>
         </DataGrid>
-        <Button Content="Buy" HorizontalAlignment="Left" Margin="10,380,0,0" VerticalAlignment="Top" Width="75" Click="Buy" Visibility="{Binding User.Username, Converter={StaticResource BuyToVisibilitiConverter}}"/>
+        <Button Name="BtnBuy" Content="Buy" HorizontalAlignment="Left" Margin="10,380,0,0" VerticalAlignment="Top" Width="75" Click="Buy" Visibility="{Binding User.Username, Converter={StaticResource BuyToVisibilitiConverter}}"/>
         <Label Content="Offer components" HorizontalAlignment="Left" Margin="10,36,0,0" VerticalAlignment="Top" Height="34" Width="163"/>
         <Button Content="Cancel" HorizontalAlignment="Left" Margin="707,380,0,0" VerticalAlignment="Top" Width="75" Click="CancleBtn"/>
         <Label Content="Number of persons:" HorizontalAlignment="Left" Margin="242,36,0,0" VerticalAlignment="Top"/>

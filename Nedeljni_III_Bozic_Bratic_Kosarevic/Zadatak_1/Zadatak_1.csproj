@@ -128,9 +128,7 @@
   <ItemGroup>
     <None Include="App.config" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Files\" />
-  </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
     <Page Include="View\AddEditReceptView.xaml">
       <SubType>Designer</SubType>
@@ -158,7 +156,7 @@
     </Page>
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="ShoppingCart.txt" />
+    <Resource Include="Files\ShoppingCart.txt" />
     <Content Include="StoreProcedures\Delete_Component.sql" />
     <Content Include="StoreProcedures\Get_AllComponents.sql" />
     <Content Include="StoreProcedures\Update_Component.sql" />
