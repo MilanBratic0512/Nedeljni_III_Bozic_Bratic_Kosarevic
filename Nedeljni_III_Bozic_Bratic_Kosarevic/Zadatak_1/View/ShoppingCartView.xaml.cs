@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -23,9 +24,10 @@ namespace Zadatak_1.View
     {
         ShoppingCartViewModel scvm = new ShoppingCartViewModel();
 
-        public ShoppingCartView()
+        public ShoppingCartView(ObservableCollection<Components> MissingComponents)
         {
             InitializeComponent();
+            scvm.AllComponents = MissingComponents;
             DataContext = scvm;
         }
 

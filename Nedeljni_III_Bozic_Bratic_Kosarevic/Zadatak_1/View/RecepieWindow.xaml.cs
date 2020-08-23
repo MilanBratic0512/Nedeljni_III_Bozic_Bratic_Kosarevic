@@ -58,8 +58,11 @@ namespace Zadatak_1.View
 
         private void ShoppingCart(object sender, RoutedEventArgs e)
         {
-            ShoppingCartView shoppingCartView = new ShoppingCartView();
+            rvm.FilterRemainingComponets();
+
+            ShoppingCartView shoppingCartView = new ShoppingCartView(rvm.MissingComponents);
             shoppingCartView.Show();
+            Close();
         }
 
         private void RecepieDetails(object sender, RoutedEventArgs e)

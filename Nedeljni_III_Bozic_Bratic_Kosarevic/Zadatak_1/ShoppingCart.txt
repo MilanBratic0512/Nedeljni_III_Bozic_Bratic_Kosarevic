@@ -1,2 +1,3 @@
-Component name: pavlaka. Amount: 3
-Time: 8/23/2020 12:26:44 PM
+Component name: djumbir. Amount: 3
+Component name: cevapi. Amount: 3
+Time: 8/23/2020 2:23:49 PM

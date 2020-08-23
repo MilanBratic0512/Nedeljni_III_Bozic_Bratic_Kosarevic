@@ -23,8 +23,6 @@ namespace Zadatak_1.ViewModel
 
         public ShoppingCartViewModel()
         {
-
-            FillList();
             ShoppingCart = new ObservableCollection<Components>();
             ComponentsForRemove = new List<Components>();
         }

@@ -81,6 +81,7 @@ insert into tblComponents values (3, 'becka', 3);
 select * from tblRecept
 select * from tblUser
 select * from tblComponents
+select * from tblType
 
 CREATE PROCEDURE Get_AllRecepts 
 AS
@@ -180,4 +181,11 @@ AS
 	insert into tblComponents(ReceptID, ComponentName, ComponentAmount) 
 	Values(@ReceptID, @ComponentName, @ComponentAmount)
 	select SCOPE_IDENTITY()
+GO
+
+CREATE PROCEDURE Get_AllComponentsByInput
+@searchComponent nvarchar(MAX)
+AS
+	select * from tblComponents
+	where  ComponentName LIKE '%'+ @searchComponent +'%'
 GO

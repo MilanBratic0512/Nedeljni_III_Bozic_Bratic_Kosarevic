@@ -18,11 +18,16 @@ namespace Zadatak_1.ViewModel
     public class RecepieViewModel : INotifyPropertyChanged
     {
         public ObservableCollection<Recept> Recepies { get; set; }
+        public ObservableCollection<Components> UserHaveComponents { get; set; }
+        public ObservableCollection<Components> MissingComponents { get; set; }
 
         public RecepieViewModel()
         {
             Recepie = new Recept();
             TypeName = new List<string>();
+            Recepies = new ObservableCollection<Recept>();
+            UserHaveComponents = new ObservableCollection<Components>();
+            MissingComponents = new ObservableCollection<Components>();
             RecepieName = "";
             Components = "";
             FillList();
@@ -337,6 +342,29 @@ namespace Zadatak_1.ViewModel
             {
                 if (s == "") continue;
 
+                using (SqlConnection conn1 = new SqlConnection(ConfigurationManager.ConnectionStrings["con"].ToString()))
+                {
+                    SqlCommand query1 = new SqlCommand(@"exec Get_AllComponentsByInput @ComponentName;", conn1);
+                    query1.Parameters.AddWithValue("@ComponentName", s);
+                    conn1.Open();
+                    SqlDataAdapter sqlDataAdapter1 = new SqlDataAdapter(query1);
+                    DataTable dataTable1 = new DataTable();
+                    sqlDataAdapter1.Fill(dataTable1);
+
+                    foreach (DataRow row1 in dataTable1.Rows)
+                    {
+                        Components c = new Components
+                        {
+                            ComponentId = int.Parse(row1[0].ToString()),
+                            ReceptId = int.Parse(row1[1].ToString()),
+                            ComponentName = row1[2].ToString(),
+                            ComponentAmount = int.Parse(row1[3].ToString())
+                        };
+
+                        UserHaveComponents.Add(c);
+                    }
+                }
+
                 using (SqlConnection conn = new SqlConnection(ConfigurationManager.ConnectionStrings["con"].ToString()))
                 {
                     SqlCommand query = new SqlCommand(@"exec Get_AllReceptsByComponents @Components", conn);
@@ -397,6 +425,46 @@ namespace Zadatak_1.ViewModel
                         {
                             Recepies.Add(r);
                         }
+                    }
+                }
+            }
+        }
+
+        public void FilterRemainingComponets()
+        {
+            using (SqlConnection conn1 = new SqlConnection(ConfigurationManager.ConnectionStrings["con"].ToString()))
+            {
+                SqlCommand query1 = new SqlCommand(@"exec Get_AllComponentsByReceptId @ReceptID;", conn1);
+                query1.Parameters.AddWithValue("@ReceptID", recepie.ReceptId);
+                conn1.Open();
+                SqlDataAdapter sqlDataAdapter1 = new SqlDataAdapter(query1);
+                DataTable dataTable1 = new DataTable();
+                sqlDataAdapter1.Fill(dataTable1);
+
+                foreach (DataRow row1 in dataTable1.Rows)
+                {
+                    Components c = new Components
+                    {
+                        ComponentId = int.Parse(row1[0].ToString()),
+                        ReceptId = int.Parse(row1[1].ToString()),
+                        ComponentName = row1[2].ToString(),
+                        ComponentAmount = int.Parse(row1[3].ToString())
+                    };
+
+                    bool contains = false;
+
+                    foreach (Components item in UserHaveComponents)
+                    {
+                        if(item.ComponentId == c.ComponentId)
+                        {
+                            contains = true;
+                            break;
+                        }
+                    }
+
+                    if(!contains)
+                    {
+                        MissingComponents.Add(c);
                     }
                 }
             }
